@@ -2,8 +2,6 @@
 //  ViewController.swift
 //  CalPals
 //
-//  Created by Emily Erwin on 2/26/24.
-//
 
 import UIKit
 
