@@ -174,19 +174,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVs-t5-6WL">
-                                <rect key="frame" x="0.0" y="122" width="393" height="21"/>
+                                <rect key="frame" x="0.0" y="87" width="393" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Event Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="STo-cF-avy">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="STo-cF-avy">
                                 <rect key="frame" x="16" y="175" width="361" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vBU-ja-XAf">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vBU-ja-XAf">
                                 <rect key="frame" x="16" y="217" width="361" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -199,8 +199,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="pno-sT-06X">
                                         <rect key="frame" x="196" y="5" width="157" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted"/>
+                                        <buttonConfiguration key="configuration" style="tinted">
+                                            <color key="baseBackgroundColor" red="0.34509803921568627" green="0.50588235294117645" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="groupButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="N30-fg-71w"/>
                                         </connections>
@@ -215,7 +218,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fj0-d6-5B3">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fj0-d6-5B3">
                                 <rect key="frame" x="16" y="304" width="361" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -228,8 +231,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="3yf-Yw-MIf">
                                         <rect key="frame" x="196" y="5" width="157" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted"/>
+                                        <buttonConfiguration key="configuration" style="tinted">
+                                            <color key="baseBackgroundColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="startButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="Y0q-7a-v9j"/>
                                         </connections>
@@ -251,33 +257,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-7V-dh9">
                                         <rect key="frame" x="196" y="5" width="157" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted"/>
+                                        <buttonConfiguration key="configuration" style="tinted">
+                                            <color key="baseBackgroundColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="endButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="yYf-lt-LM6"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2P-iV-TCN">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4SV-eA-Kgd">
-                                <rect key="frame" x="16" y="482" width="361" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="o2A-ZP-iSw">
-                                        <rect key="frame" x="196" y="5" width="157" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted"/>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gK-h2-iUD">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -294,8 +283,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Z2m-yi-hUC">
                                         <rect key="frame" x="196" y="5" width="157" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted"/>
+                                        <buttonConfiguration key="configuration" style="tinted">
+                                            <color key="baseBackgroundColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="noEarlierButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="2CY-CM-Ydh"/>
                                         </connections>
@@ -317,8 +309,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Uhj-aO-aly">
                                         <rect key="frame" x="196" y="5" width="157" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted"/>
+                                        <buttonConfiguration key="configuration" style="tinted">
+                                            <color key="baseBackgroundColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="noLaterButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="VYT-cX-nsM"/>
                                         </connections>
@@ -340,8 +335,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ViM-mg-IqO">
                                         <rect key="frame" x="196" y="5" width="157" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted" title="Never"/>
+                                        <buttonConfiguration key="configuration" style="tinted" title="Never">
+                                            <color key="baseBackgroundColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="repeatButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="UPS-Ka-jcL"/>
                                         </connections>
@@ -360,21 +358,35 @@
                                 <rect key="frame" x="136" y="701" width="122" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Create Event"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Create Event">
+                                    <color key="baseBackgroundColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createEventButtonPressed:" destination="vIT-zB-dup" eventType="touchUpInside" id="KgX-gN-KCG"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duration (in minutes)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AML-SZ-oEN">
+                                <rect key="frame" x="16" y="482" width="361" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SVl-Tz-Ivh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="plus.app" catalog="system" id="iNW-qB-4nR"/>
                     <connections>
-                        <outlet property="durationLabel" destination="3gK-h2-iUD" id="dza-bC-Lxw"/>
+                        <outlet property="descriptionTextField" destination="Fj0-d6-5B3" id="PJn-O9-fq6"/>
+                        <outlet property="durationTextField" destination="AML-SZ-oEN" id="DyZ-k9-Aop"/>
                         <outlet property="earliestLabel" destination="xfY-IW-3vj" id="ey6-EF-3aL"/>
                         <outlet property="endButton" destination="wtb-7V-dh9" id="0R1-Gy-xrg"/>
                         <outlet property="endLabel" destination="u2P-iV-TCN" id="Xdk-ks-HGj"/>
+                        <outlet property="eventNameTextField" destination="STo-cF-avy" id="fUe-m5-qEj"/>
                         <outlet property="groupButton" destination="pno-sT-06X" id="F3u-r6-IDF"/>
                         <outlet property="groupLabel" destination="Ojk-Co-vE6" id="1mh-um-UWP"/>
                         <outlet property="latestLabel" destination="7xE-9W-Fzz" id="ZHE-NF-lZC"/>
+                        <outlet property="locationTextField" destination="vBU-ja-XAf" id="1lZ-he-rt6"/>
                         <outlet property="noEarlierButton" destination="Z2m-yi-hUC" id="SVh-Ge-asP"/>
                         <outlet property="noLaterButton" destination="Uhj-aO-aly" id="WbW-xY-d4g"/>
                         <outlet property="repeatButton" destination="ViM-mg-IqO" id="ZLR-uP-uvB"/>
@@ -523,7 +535,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="U6e-3N-d7g"/>
+        <segue reference="KtZ-ow-Aug"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="PuzzlePieces" width="200" height="240"/>

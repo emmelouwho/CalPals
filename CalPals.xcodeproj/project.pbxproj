@@ -44,6 +44,7 @@
 		F411B84E2B8D69A300CA789C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F411B84D2B8D69A300CA789C /* Assets.xcassets */; };
 		F411B8512B8D69A300CA789C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F411B84F2B8D69A300CA789C /* LaunchScreen.storyboard */; };
 		F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */; };
+		F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918442BA8C2E90039ADB8 /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F411B8502B8D69A300CA789C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F411B8522B8D69A300CA789C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		F4D918442BA8C2E90039ADB8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				F411B8482B8D69A100CA789C /* ViewController.swift */,
 				1338BC122BA7390700CA7215 /* GoogleService-Info.plist */,
 				F411B84A2B8D69A100CA789C /* Main.storyboard */,
+				F4D918442BA8C2E90039ADB8 /* Event.swift */,
 				F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */,
 				1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */,
 				1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */,
@@ -244,6 +247,7 @@
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F411B8452B8D69A100CA789C /* AppDelegate.swift in Sources */,
 				F411B8472B8D69A100CA789C /* SceneDelegate.swift in Sources */,
+				F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */,
 				F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
