@@ -40,6 +40,7 @@ class CreateEventViewController: UIViewController, LocationChanger {
         eventNameTextField.text = ""
         descriptionTextField.text = ""
         durationTextField.text = ""
+        locationLabel.text = "Location"
         groupButton.setTitle("", for: .normal)
         repeatButton.setTitle("Never", for: .normal)
         
@@ -120,7 +121,7 @@ class CreateEventViewController: UIViewController, LocationChanger {
     }
     
     @IBAction func createEventButtonPressed(_ sender: Any) {
-        newEvent.setBasic(name: eventNameTextField.text, location: "", group: groupButton.title(for: .normal), description: descriptionTextField.text, repeats: repeatButton.title(for: .normal), duration: durationTextField.text ?? "")
+        newEvent.setBasic(name: eventNameTextField.text, location: locationLabel.text, group: groupButton.title(for: .normal), description: descriptionTextField.text, repeats: repeatButton.title(for: .normal), duration: durationTextField.text ?? "")
         
         let errorMessage = newEvent.validateEvent()
         if errorMessage != "" {
@@ -187,7 +188,6 @@ class CreateEventViewController: UIViewController, LocationChanger {
     
     // MARK: - handle segue for location
     func changeLocation(newLoc: String) {
-        newEvent.loc = newLoc
         locationLabel.text = " \(newLoc)"
     }
     
