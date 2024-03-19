@@ -1,12 +1,19 @@
 # Contributions:
 
-Andrea Aranda Ramos: Schedule (25%)
+Andrea Aranda Ramos (25%)
+- Schedule Page
+  
+Emme Erwin (35%)
+- Create Event Page
+- Tab View Controller
+- Locations on Create Event
 
-Emme Erwin: Create Event Page and Tab View Controller, Locations (35%)
+Mahta Ghotbi (15%)
+- Launch Screen
 
-Mahta Ghotbi: Launch Screen (15%)
-
-Richie Wahidin: Login / Sign Up Screen (25%)
+Richie Wahidin (25%)
+- Login / Sign Up Screen 
+- Firebase setup
 
 # Deviations:
 We have not been able to implement the sign-in through Google and Apple, but it will hopefully be included in the Beta submission.
