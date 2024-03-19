@@ -40,6 +40,7 @@ class CreateEventViewController: UIViewController, LocationChanger {
         eventNameTextField.text = ""
         descriptionTextField.text = ""
         durationTextField.text = ""
+        locationLabel.text = "Location"
         groupButton.setTitle("", for: .normal)
         repeatButton.setTitle("Never", for: .normal)
         
