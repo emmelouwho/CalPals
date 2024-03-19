@@ -14,6 +14,7 @@ class LocationPickerViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchResultsTable: UITableView!
+    
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
     var delegate: UIViewController!
@@ -26,6 +27,7 @@ class LocationPickerViewController: UIViewController, UITableViewDataSource, UIT
         searchResultsTable?.dataSource = self
     }
     
+    // Handles input text
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchCompleter.queryFragment = searchText
     }
@@ -36,10 +38,12 @@ class LocationPickerViewController: UIViewController, UITableViewDataSource, UIT
         searchResultsTable.reloadData()
     }
         
+    // TODO: fix error handling
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         // Error handling
     }
     
+    // MARK: - table handling
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -57,6 +61,7 @@ class LocationPickerViewController: UIViewController, UITableViewDataSource, UIT
         return cell
     }
 
+    // upon selecting an item in the table
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -65,6 +70,7 @@ class LocationPickerViewController: UIViewController, UITableViewDataSource, UIT
 
         let search = MKLocalSearch(request: searchRequest)
         
+        // set location on previous VC and return
         let otherVC = delegate as! LocationChanger
         otherVC.changeLocation(newLoc: result.title)
         self.dismiss(animated: true, completion: nil)
