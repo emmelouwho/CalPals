@@ -17,7 +17,7 @@ public let days = [
     "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
 ]
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class SchedulingViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
