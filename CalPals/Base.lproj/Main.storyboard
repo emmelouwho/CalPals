@@ -553,7 +553,7 @@
         <!--Schedule-->
         <scene sceneID="yif-r1-hJQ">
             <objects>
-                <viewController id="HrU-mU-4Sd" customClass="SchedulingViewController" sceneMemberID="viewController">
+                <viewController id="HrU-mU-4Sd" customClass="ScheduleViewController" customModule="CalPals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fwj-ky-zxW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -633,9 +633,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Schedule" image="calendar" catalog="system" id="ywH-al-9Ql"/>
                     <connections>
-                        <outlet property="collectionView" destination="zzl-gY-K8i" id="mnj-Ic-e4R"/>
-                        <outlet property="headerCollectionView" destination="Go2-Pt-3Kq" id="t5f-YJ-dYA"/>
-                        <outlet property="tableView" destination="Kc9-rA-5o9" id="c9R-Tc-LhT"/>
+                        <outlet property="collectionView" destination="zzl-gY-K8i" id="HBZ-cO-Kqm"/>
+                        <outlet property="headerCollectionView" destination="Go2-Pt-3Kq" id="zLb-fJ-ux6"/>
+                        <outlet property="tableView" destination="Kc9-rA-5o9" id="0Rh-tj-wqB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zf8-iw-g47" sceneMemberID="firstResponder"/>
@@ -660,7 +660,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KtZ-ow-Aug"/>
+        <segue reference="U6e-3N-d7g"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="PuzzlePieces" width="200" height="240"/>
@@ -670,7 +670,7 @@
         <image name="person.3" catalog="system" width="128" height="66"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

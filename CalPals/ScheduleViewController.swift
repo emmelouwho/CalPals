@@ -1,9 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A view controller that displays a collection view of custom cells.
-*/
+//
+//  ScheduleViewController.swift
+//  CalPals
+//
+//  Created by Emily Erwin on 3/18/24.
+//
 
 import UIKit
 
@@ -17,10 +17,10 @@ public let days = [
     "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
 ]
 
-class SchedulingViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var collectionView: UICollectionView!
+class ScheduleViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var headerCollectionView: UICollectionView!
     
     let textCellIdentifier = "TextCell"
@@ -89,5 +89,5 @@ class SchedulingViewController: UIViewController, UICollectionViewDataSource, UI
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 43
     }
-    
+
 }
