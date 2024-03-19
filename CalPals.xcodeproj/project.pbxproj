@@ -37,6 +37,8 @@
 		1338BC492BA73CB100CA7215 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC482BA73CB100CA7215 /* FirebaseStorageCombine-Community */; };
 		1338BC4B2BA73D3E00CA7215 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */; };
 		1338BC4E2BA7452900CA7215 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */; };
+		3009B0A32BA9176F00D9F31A /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3009B0A22BA9176F00D9F31A /* SchedulingViewController.swift */; };
+		3009B0A52BA9180D00D9F31A /* CustomCollectionViewCell copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */; };
 		375A20942BA74DFE003ABF00 /* CalPal Pics in Resources */ = {isa = PBXBuildFile; fileRef = 375A20932BA74DFE003ABF00 /* CalPal Pics */; };
 		375A209B2BA75D7B003ABF00 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375A20992BA75D7B003ABF00 /* Launch Screen.storyboard */; };
 		F411B8452B8D69A100CA789C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F411B8442B8D69A100CA789C /* AppDelegate.swift */; };
@@ -54,6 +56,8 @@
 		1338BC122BA7390700CA7215 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		3009B0A22BA9176F00D9F31A /* SchedulingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchedulingViewController.swift; path = ../../../Desktop/SchedulingViewController.swift; sourceTree = "<group>"; };
+		3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CustomCollectionViewCell copy.swift"; sourceTree = "<group>"; };
 		375A20932BA74DFE003ABF00 /* CalPal Pics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "CalPal Pics"; sourceTree = "<group>"; };
 		375A209A2BA75D7B003ABF00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F411B8412B8D69A100CA789C /* CalPals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalPals.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +136,8 @@
 				F411B8482B8D69A100CA789C /* ViewController.swift */,
 				1338BC122BA7390700CA7215 /* GoogleService-Info.plist */,
 				F411B84A2B8D69A100CA789C /* Main.storyboard */,
+				3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */,
+				3009B0A22BA9176F00D9F31A /* SchedulingViewController.swift */,
 				F4D918462BA8FBD50039ADB8 /* LocationPickerViewController.swift */,
 				F4D918482BA90F2A0039ADB8 /* LocationChanger.swift */,
 				F4D918442BA8C2E90039ADB8 /* Event.swift */,
@@ -250,11 +256,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3009B0A32BA9176F00D9F31A /* SchedulingViewController.swift in Sources */,
 				1338BC4E2BA7452900CA7215 /* CreateAccountViewController.swift in Sources */,
 				1338BC4B2BA73D3E00CA7215 /* LoginViewController.swift in Sources */,
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F411B8452B8D69A100CA789C /* AppDelegate.swift in Sources */,
 				F411B8472B8D69A100CA789C /* SceneDelegate.swift in Sources */,
+				3009B0A52BA9180D00D9F31A /* CustomCollectionViewCell copy.swift in Sources */,
 				F4D918492BA90F2A0039ADB8 /* LocationChanger.swift in Sources */,
 				F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */,
 				F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */,
