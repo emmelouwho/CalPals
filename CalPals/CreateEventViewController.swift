@@ -7,8 +7,7 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController {
-    
+class CreateEventViewController: UIViewController, LocationChanger {
     var newEvent = Event()
     
     // MARK: - labels
@@ -18,6 +17,7 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var latestLabel: UILabel!
     @IBOutlet weak var earliestLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     // MARK: - buttons
     @IBOutlet weak var groupButton: UIButton!
@@ -29,7 +29,6 @@ class CreateEventViewController: UIViewController {
     
     //MARK: - text fields
     @IBOutlet weak var eventNameTextField: UITextField!
-    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var durationTextField: UITextField!
     
@@ -39,7 +38,6 @@ class CreateEventViewController: UIViewController {
         
         // reseting all info
         eventNameTextField.text = ""
-        locationTextField.text = ""
         descriptionTextField.text = ""
         durationTextField.text = ""
         groupButton.setTitle("", for: .normal)
@@ -57,6 +55,7 @@ class CreateEventViewController: UIViewController {
         addBorder(label: latestLabel)
         addBorder(label: earliestLabel)
         addBorder(label: endLabel)
+        addBorder(label: locationLabel)
     }
     
     func addBorder(label: UILabel){
@@ -121,7 +120,7 @@ class CreateEventViewController: UIViewController {
     }
     
     @IBAction func createEventButtonPressed(_ sender: Any) {
-        newEvent.setBasic(name: eventNameTextField.text, location: locationTextField.text, group: groupButton.title(for: .normal), description: descriptionTextField.text, repeats: repeatButton.title(for: .normal), duration: durationTextField.text ?? "")
+        newEvent.setBasic(name: eventNameTextField.text, location: "", group: groupButton.title(for: .normal), description: descriptionTextField.text, repeats: repeatButton.title(for: .normal), duration: durationTextField.text ?? "")
         
         let errorMessage = newEvent.validateEvent()
         if errorMessage != "" {
@@ -184,5 +183,19 @@ class CreateEventViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy"
         return formatter.string(from: date)
+    }
+    
+    // MARK: - handle segue for location
+    func changeLocation(newLoc: String) {
+        newEvent.loc = newLoc
+        locationLabel.text = " \(newLoc)"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "locationSegue",
+           let destination = segue.destination as? LocationPickerViewController {
+            destination.delegate = self
+        }
+            
     }
 }
