@@ -45,6 +45,8 @@
 		F411B8492B8D69A100CA789C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F411B8482B8D69A100CA789C /* ViewController.swift */; };
 		F411B84C2B8D69A100CA789C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F411B84A2B8D69A100CA789C /* Main.storyboard */; };
 		F411B84E2B8D69A300CA789C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F411B84D2B8D69A300CA789C /* Assets.xcassets */; };
+		F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */; };
+		F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */; };
 		F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */; };
 		F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */; };
 		F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918442BA8C2E90039ADB8 /* Event.swift */; };
@@ -66,6 +68,8 @@
 		F411B84B2B8D69A100CA789C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F411B84D2B8D69A300CA789C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F411B8522B8D69A300CA789C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
+		F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		F4D918442BA8C2E90039ADB8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				F4D918482BA90F2A0039ADB8 /* LocationChanger.swift */,
 				F4D918442BA8C2E90039ADB8 /* Event.swift */,
 				F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */,
+				F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */,
+				F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */,
 				F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */,
 				1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */,
 				1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */,
@@ -258,8 +264,10 @@
 			files = (
 				1338BC4E2BA7452900CA7215 /* CreateAccountViewController.swift in Sources */,
 				1338BC4B2BA73D3E00CA7215 /* LoginViewController.swift in Sources */,
+				F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */,
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,
+				F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */,
 				F411B8452B8D69A100CA789C /* AppDelegate.swift in Sources */,
 				F411B8472B8D69A100CA789C /* SceneDelegate.swift in Sources */,
 				3009B0A52BA9180D00D9F31A /* CustomCollectionViewCell copy.swift in Sources */,
@@ -419,7 +427,7 @@
 				CODE_SIGN_ENTITLEMENTS = CalPals/CalPals.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RNZ93G58JA;
+				DEVELOPMENT_TEAM = K9W2C9V5YF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalPals/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
