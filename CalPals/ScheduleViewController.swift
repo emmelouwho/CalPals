@@ -20,6 +20,7 @@ public let days = [
 class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    
     @IBOutlet weak var tableView: UITableView!
     var availabilityModel = AvailabilityModel()
     var isInitiallyHighlighting: Bool = true
@@ -38,6 +39,35 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         tableView.addGestureRecognizer(longPressGesture)
     }
+    
+    func createHeaderView() -> UIView {
+        let headerView = UIView()
+        headerView.backgroundColor = .lightGray
+        
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add day labels to the stack view
+        for day in days {
+            let label = UILabel()
+            label.text = day
+            label.textAlignment = .center
+            stackView.addArrangedSubview(label)
+        }
+        headerView.addSubview(stackView)
+        
+        // Set stackView constraints
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: headerView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 60),
+            stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15)
+        ])
+        
+        return headerView
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 48
@@ -65,6 +95,14 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         cell.configureWithHighlights(highlights)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return createHeaderView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
     
     @objc func handleLongPressGesture(_ gesture: UIGestureRecognizer) {

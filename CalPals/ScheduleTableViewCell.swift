@@ -44,10 +44,7 @@ class ScheduleTableViewCell: UITableViewCell {
     
     private func setupTimeSlots() {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 0
         contentView.addSubview(stackView)
         
         // Layout constraints for the stackView
