@@ -12,18 +12,12 @@ class CreateEventViewController: UIViewController, LocationChanger {
     
     // MARK: - labels
     @IBOutlet weak var groupLabel: UILabel!
-    @IBOutlet weak var startLabel: UILabel!
-    @IBOutlet weak var repeatsLabel: UILabel!
     @IBOutlet weak var latestLabel: UILabel!
     @IBOutlet weak var earliestLabel: UILabel!
-    @IBOutlet weak var endLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
     // MARK: - buttons
     @IBOutlet weak var groupButton: UIButton!
-    @IBOutlet weak var repeatButton: UIButton!
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var noLaterButton: UIButton!
     @IBOutlet weak var noEarlierButton: UIButton!
     
@@ -42,20 +36,14 @@ class CreateEventViewController: UIViewController, LocationChanger {
         durationTextField.text = ""
         locationLabel.text = "Location"
         groupButton.setTitle("", for: .normal)
-        repeatButton.setTitle("Never", for: .normal)
         
-        startButton.setTitle(formatDate(date: Date()), for: .normal)
-        endButton.setTitle(formatDate(date: Date()), for: .normal)
         noLaterButton.setTitle(formatTime(date: Date()), for: .normal)
         noEarlierButton.setTitle(formatTime(date: Date()), for: .normal)
         
         // styling added
         addBorder(label: groupLabel)
-        addBorder(label: startLabel)
-        addBorder(label: repeatsLabel)
         addBorder(label: latestLabel)
         addBorder(label: earliestLabel)
-        addBorder(label: endLabel)
         addBorder(label: locationLabel)
     }
     
@@ -77,32 +65,7 @@ class CreateEventViewController: UIViewController, LocationChanger {
         }
         present(controller,animated: true)
     }
-    
-    @IBAction func repeatButtonPressed(_ sender: Any) {
-        let controller = UIAlertController(title: "Select one", message: "Please choose how often you would like for this to repeat", preferredStyle: .actionSheet)
-        
-        for option in repeatOptions {
-            controller.addAction(UIAlertAction(title: option, style: .default, handler: {action in self.repeatButton.setTitle(action.title, for: .normal)}))
-        }
-        present(controller,animated: true)
-    }
 
-    @IBAction func startButtonPressed(_ sender: Any) {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(startDateChange(datePicker: )), for: UIControl.Event.valueChanged)
-        let controller = getDateAlert(datePicker: datePicker)
-        present(controller, animated: true, completion: nil)
-    }
-    
-    @IBAction func endButtonPressed(_ sender: Any) {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(endDateChange(datePicker: )), for: UIControl.Event.valueChanged)
-        let controller = getDateAlert(datePicker: datePicker)
-        present(controller, animated: true, completion: nil)
-    }
-    
     
     @IBAction func noEarlierButtonPressed(_ sender: Any) {
         let datePicker = UIDatePicker()
@@ -121,7 +84,7 @@ class CreateEventViewController: UIViewController, LocationChanger {
     }
     
     @IBAction func createEventButtonPressed(_ sender: Any) {
-        newEvent.setBasic(name: eventNameTextField.text, location: locationLabel.text, group: groupButton.title(for: .normal), description: descriptionTextField.text, repeats: repeatButton.title(for: .normal), duration: durationTextField.text ?? "")
+        newEvent.setBasic(name: eventNameTextField.text, location: locationLabel.text, group: groupButton.title(for: .normal), description: descriptionTextField.text, duration: durationTextField.text ?? "")
         
         let errorMessage = newEvent.validateEvent()
         if errorMessage != "" {
@@ -152,15 +115,6 @@ class CreateEventViewController: UIViewController, LocationChanger {
     }
     
     // MARK: - Date Changers
-    @objc func startDateChange(datePicker: UIDatePicker){
-        newEvent.startDate = datePicker.date
-        startButton.setTitle(formatDate(date: datePicker.date), for: .normal)
-    }
-    
-    @objc func endDateChange(datePicker: UIDatePicker){
-        newEvent.endDate = datePicker.date
-        endButton.setTitle(formatDate(date: datePicker.date), for: .normal)
-    }
     
     @objc func noEarlierDateChange(datePicker: UIDatePicker){
         newEvent.noEarlierThan = datePicker.date
