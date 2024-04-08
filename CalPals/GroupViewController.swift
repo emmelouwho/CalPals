@@ -12,82 +12,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
 protocol CreateGroupDelegate : AnyObject {
-    func addGroup(groupImage:UIImage, groupName: String, events:[String], groupDescription: String)
+    func addGroup(groupImage:UIImage, groupName: String, events:[String], groupDescription: String)->NSManagedObject
 }
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateGroupDelegate {
     
-//    class GroupTableViewCell: UITableViewCell {
-//        var groupImage: UIImageView!
-//        var groupName: UILabel!
-//        var groupUpcomingEvents: UITableView!
-//        var events: [String] = [] // Array to hold event names
-//        
-//        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//            super.init(style: style, reuseIdentifier: reuseIdentifier)
-//            
-//            groupImage = UIImageView()
-//            groupName = UILabel()
-//            groupUpcomingEvents = UITableView()
-//            
-//            contentView.addSubview(groupImage)
-//            contentView.addSubview(groupName)
-//            contentView.addSubview(groupUpcomingEvents)
-//            
-//            setupConstraints()
-//        }
-//        
-//        required init?(coder aDecoder: NSCoder) {
-//            super.init(coder: aDecoder)
-//        }
-//        
-//        private func setupConstraints() {
-//            // Add constraints for groupImage, groupName, and groupUpcomingEvents
-//            // For example:
-//            groupImage.translatesAutoresizingMaskIntoConstraints = false
-//            groupName.translatesAutoresizingMaskIntoConstraints = false
-//            groupUpcomingEvents.translatesAutoresizingMaskIntoConstraints = false
-//            
-//            NSLayoutConstraint.activate([
-//                groupImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-//                groupImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-//                groupImage.widthAnchor.constraint(equalToConstant: 50),
-//                groupImage.heightAnchor.constraint(equalToConstant: 50),
-//                
-//                groupName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-//                groupName.leadingAnchor.constraint(equalTo: groupImage.trailingAnchor, constant: 8),
-//                groupName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-//                
-//                groupUpcomingEvents.topAnchor.constraint(equalTo: groupName.bottomAnchor, constant: 8),
-//                groupUpcomingEvents.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-//                groupUpcomingEvents.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-//                groupUpcomingEvents.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
-//            ])
-//        }
-//        
-//        override func layoutSubviews() {
-//            super.layoutSubviews()
-//            groupImage.layer.cornerRadius = groupImage.frame.size.width / 2
-//            groupImage.clipsToBounds = true
-//        }
-//    }
-    
-//    class NoGroupsCell: UITableViewCell {
-//        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//            super.init(style: style, reuseIdentifier: reuseIdentifier)
-//            setupCell()
-//        }
-//        required init?(coder aDecoder: NSCoder) {
-//            super.init(coder: aDecoder)
-//            setupCell()
-//        }
-//        private func setupCell() {
-//            textLabel?.text = "You are in no groups. Please create one or join via an invite link."
-//            textLabel?.textAlignment = .center
-//            textLabel?.numberOfLines = 0
-//        }
-//    }
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGroupsLabel: UILabel!
     
@@ -119,7 +48,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.reloadData()
     }
     
-    func addGroup(groupImage: UIImage, groupName: String, events: [String], groupDescription: String) {
+    override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+        tableView.reloadData()
+      }
+    
+    func addGroup(groupImage: UIImage, groupName: String, events: [String], groupDescription: String) ->NSManagedObject {
         let group = NSEntityDescription.insertNewObject(forEntityName: "GroupEntity", into: context)
         if let imageData = groupImage.pngData() {
             group.setValue(imageData, forKey: "groupImage")
@@ -136,6 +70,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             noGroupsLabel.isHidden = true
         }
         tableView.reloadData()
+        return group
     }
     
     func retrieveGroups() -> [NSManagedObject] {
@@ -191,11 +126,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if selectedCellIndexPath == indexPath {
-            selectedCellIndexPath = nil
-        } else {
-            selectedCellIndexPath = indexPath
-        }
+        let selectedGroup = groupList[indexPath.row] // Assuming groupList is your array of GroupEntity objects
+         performSegue(withIdentifier: "showGroupSettingsSegue", sender: selectedGroup)
         tableView.reloadData()
     }
     
@@ -204,6 +136,10 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let destination = segue.destination as? CreateGroupViewController
         {
             destination.delegate = self
+        } else if segue.identifier == "showGroupSettingsSegue",
+            let selectedGroup = sender as? GroupEntity,
+            let destination = segue.destination as? GroupSettingsViewController {
+            destination.currGroup = selectedGroup
         }
     }
 

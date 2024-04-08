@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateGroupViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -14,6 +15,7 @@ class CreateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
     @IBOutlet weak var groupImageField: UIImageView!
     @IBOutlet weak var groupDescField: UITextField!
     var groupName: String = ""
+    var group: NSManagedObject?
     
     var delegate: CreateGroupDelegate?
     
@@ -54,13 +56,22 @@ class CreateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
                       let groupImage = groupImageField.image else {
                     return
                 }
-                delegate?.addGroup(groupImage: groupImage, groupName: groupName, events: [String](), groupDescription: groupDesc)
+            group = (delegate?.addGroup(groupImage: groupImage, groupName: groupName, events: [String](), groupDescription: groupDesc))!
                 let controller = UIAlertController(
                 title: "Group saved",
-                message: "Created a group titled \(groupName) with description \(groupDesc)", preferredStyle: .alert)
+                message: "Created a group titled '\(groupName)' with description '\(groupDesc)'", preferredStyle: .alert)
                 controller.addAction(UIAlertAction(title: "OK", style: .default))
                 present(controller, animated: true)
                 // Dismiss or navigate to another screen
+                performSegue(withIdentifier: "goToGroupSettingsSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToGroupSettingsSegue",
+            let destination = segue.destination as? GroupSettingsViewController
+        {
+            destination.currGroup = group as? GroupEntity
+        }
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
