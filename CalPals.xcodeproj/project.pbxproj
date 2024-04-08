@@ -51,6 +51,7 @@
 		F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */; };
 		F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */; };
 		F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */; };
+		F49AA1192BC31FDF009CF1A8 /* TimeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */; };
 		F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */; };
 		F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918442BA8C2E90039ADB8 /* Event.swift */; };
 		F4D918472BA8FBD50039ADB8 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918462BA8FBD50039ADB8 /* LocationPickerViewController.swift */; };
@@ -77,6 +78,7 @@
 		F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
 		F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConstants.swift; sourceTree = "<group>"; };
 		F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		F4D918442BA8C2E90039ADB8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		F4D918462BA8FBD50039ADB8 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				F4D918482BA90F2A0039ADB8 /* LocationChanger.swift */,
 				F4D918442BA8C2E90039ADB8 /* Event.swift */,
 				F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */,
+				F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */,
 				F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */,
 				F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */,
 				F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */,
@@ -279,6 +282,7 @@
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,
 				131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */,
 				F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */,
+				F49AA1192BC31FDF009CF1A8 /* TimeConstants.swift in Sources */,
 				131ED0FA2BBCB3EE00B48430 /* GroupViewController.swift in Sources */,
 				F411B8452B8D69A100CA789C /* AppDelegate.swift in Sources */,
 				F411B8472B8D69A100CA789C /* SceneDelegate.swift in Sources */,

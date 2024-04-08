@@ -6,22 +6,13 @@
 //
 
 import UIKit
-
-public let times = [
-    "12AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM",
-    "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM",
-    "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"
-]
-
-public let days = [
-    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-]
+import FirebaseDatabase
+import FirebaseAuth
 
 class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
+    var activityIndicator: UIActivityIndicatorView!
     var availabilityModel = AvailabilityModel()
     var isInitiallyHighlighting: Bool = true
     var lastToggledIndexPath: IndexPath?
@@ -36,8 +27,32 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        
+        // add gesture for table selection
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         tableView.addGestureRecognizer(longPressGesture)
+        
+        // while loading data from firebase, show loading indicator and hide table
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
+        
+        // if we have a current user, go get their scheduling data from the database
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            availabilityModel.addFirebaseDataToCurrent(forUser: uid) {
+                [weak self]  in
+                guard let strongSelf = self else { return }
+                strongSelf.tableView.reloadData()
+                strongSelf.activityIndicator.stopAnimating()
+                strongSelf.tableView.isHidden = false
+            }
+        } else {
+            activityIndicator.stopAnimating()
+            tableView.isHidden = false
+        }
     }
     
     func createHeaderView() -> UIView {
@@ -68,7 +83,6 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         return headerView
     }
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 48
     }
@@ -138,6 +152,14 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
                 lastToggledIndexPath = nil
                 lastToggledSlot = nil
             }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            availabilityModel.storeDataInFireBase(forUser: uid)
         }
     }
 }
