@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		131ED0FA2BBCB3EE00B48430 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0F92BBCB3EE00B48430 /* GroupViewController.swift */; };
 		131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */; };
-		131ED1012BBCBBF000B48430 /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0FF2BBCBBF000B48430 /* CalPals.xcdatamodeld */; };
 		1338BC132BA7390800CA7215 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1338BC122BA7390700CA7215 /* GoogleService-Info.plist */; };
 		1338BC152BA73CB100CA7215 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC142BA73CB100CA7215 /* FirebaseAnalytics */; };
 		1338BC172BA73CB100CA7215 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC162BA73CB100CA7215 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -48,6 +47,7 @@
 		F411B8492B8D69A100CA789C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F411B8482B8D69A100CA789C /* ViewController.swift */; };
 		F411B84C2B8D69A100CA789C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F411B84A2B8D69A100CA789C /* Main.storyboard */; };
 		F411B84E2B8D69A300CA789C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F411B84D2B8D69A300CA789C /* Assets.xcassets */; };
+		F43476C82BC4B33E002834A3 /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F43476C62BC4B33E002834A3 /* CalPals.xcdatamodeld */; };
 		F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */; };
 		F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */; };
 		F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */; };
@@ -60,7 +60,6 @@
 /* Begin PBXFileReference section */
 		131ED0F92BBCB3EE00B48430 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
-		131ED1002BBCBBF000B48430 /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
 		1338BC122BA7390700CA7215 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		F411B84B2B8D69A100CA789C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F411B84D2B8D69A300CA789C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F411B8522B8D69A300CA789C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F43476C72BC4B33E002834A3 /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
 		F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
 		F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				F411B84D2B8D69A300CA789C /* Assets.xcassets */,
 				375A20992BA75D7B003ABF00 /* Launch Screen.storyboard */,
 				F411B8522B8D69A300CA789C /* Info.plist */,
-				131ED0FF2BBCBBF000B48430 /* CalPals.xcdatamodeld */,
+				F43476C62BC4B33E002834A3 /* CalPals.xcdatamodeld */,
 			);
 			path = CalPals;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 				1338BC4E2BA7452900CA7215 /* CreateAccountViewController.swift in Sources */,
 				1338BC4B2BA73D3E00CA7215 /* LoginViewController.swift in Sources */,
 				F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */,
-				131ED1012BBCBBF000B48430 /* CalPals.xcdatamodeld in Sources */,
+				F43476C82BC4B33E002834A3 /* CalPals.xcdatamodeld in Sources */,
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,
 				131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */,
@@ -661,14 +661,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		131ED0FF2BBCBBF000B48430 /* CalPals.xcdatamodeld */ = {
+		F43476C62BC4B33E002834A3 /* CalPals.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				131ED1002BBCBBF000B48430 /* CalPals.xcdatamodel */,
+				F43476C72BC4B33E002834A3 /* CalPals.xcdatamodel */,
 			);
-			currentVersion = 131ED1002BBCBBF000B48430 /* CalPals.xcdatamodel */;
+			currentVersion = F43476C72BC4B33E002834A3 /* CalPals.xcdatamodel */;
 			name = CalPals.xcdatamodeld;
-			path = "/Users/richie/Documents/University/Spring 2024/C S 371L/CalPals/CalPals/CalPals.xcdatamodeld";
+			path = /Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/CalPals.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
