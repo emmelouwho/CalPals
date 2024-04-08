@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		131ED0FA2BBCB3EE00B48430 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0F92BBCB3EE00B48430 /* GroupViewController.swift */; };
 		131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */; };
+		131ED1012BBCBBF000B48430 /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0FF2BBCBBF000B48430 /* CalPals.xcdatamodeld */; };
+		131ED10D2BC3AE8A00B48430 /* GroupSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED10C2BC3AE8900B48430 /* GroupSettingsViewController.swift */; };
+		131ED10F2BC3B66600B48430 /* UpdateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED10E2BC3B66500B48430 /* UpdateGroupViewController.swift */; };
 		1338BC132BA7390800CA7215 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1338BC122BA7390700CA7215 /* GoogleService-Info.plist */; };
 		1338BC152BA73CB100CA7215 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC142BA73CB100CA7215 /* FirebaseAnalytics */; };
 		1338BC172BA73CB100CA7215 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC162BA73CB100CA7215 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -51,6 +54,7 @@
 		F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */; };
 		F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */; };
 		F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */; };
+		F49AA1192BC31FDF009CF1A8 /* TimeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */; };
 		F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */; };
 		F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918442BA8C2E90039ADB8 /* Event.swift */; };
 		F4D918472BA8FBD50039ADB8 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918462BA8FBD50039ADB8 /* LocationPickerViewController.swift */; };
@@ -60,6 +64,9 @@
 /* Begin PBXFileReference section */
 		131ED0F92BBCB3EE00B48430 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		131ED1002BBCBBF000B48430 /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
+		131ED10C2BC3AE8900B48430 /* GroupSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSettingsViewController.swift; sourceTree = "<group>"; };
+		131ED10E2BC3B66500B48430 /* UpdateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGroupViewController.swift; sourceTree = "<group>"; };
 		1338BC122BA7390700CA7215 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +84,7 @@
 		F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
 		F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConstants.swift; sourceTree = "<group>"; };
 		F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		F4D918442BA8C2E90039ADB8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		F4D918462BA8FBD50039ADB8 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
@@ -146,13 +154,16 @@
 				F411B8482B8D69A100CA789C /* ViewController.swift */,
 				1338BC122BA7390700CA7215 /* GoogleService-Info.plist */,
 				F411B84A2B8D69A100CA789C /* Main.storyboard */,
+				131ED10C2BC3AE8900B48430 /* GroupSettingsViewController.swift */,
 				131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */,
+				131ED10E2BC3B66500B48430 /* UpdateGroupViewController.swift */,
 				131ED0F92BBCB3EE00B48430 /* GroupViewController.swift */,
 				3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */,
 				F4D918462BA8FBD50039ADB8 /* LocationPickerViewController.swift */,
 				F4D918482BA90F2A0039ADB8 /* LocationChanger.swift */,
 				F4D918442BA8C2E90039ADB8 /* Event.swift */,
 				F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */,
+				F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */,
 				F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */,
 				F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */,
 				F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */,
@@ -279,7 +290,9 @@
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,
 				131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */,
 				F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */,
+				F49AA1192BC31FDF009CF1A8 /* TimeConstants.swift in Sources */,
 				131ED0FA2BBCB3EE00B48430 /* GroupViewController.swift in Sources */,
+				131ED10F2BC3B66600B48430 /* UpdateGroupViewController.swift in Sources */,
 				F411B8452B8D69A100CA789C /* AppDelegate.swift in Sources */,
 				F411B8472B8D69A100CA789C /* SceneDelegate.swift in Sources */,
 				3009B0A52BA9180D00D9F31A /* CustomCollectionViewCell copy.swift in Sources */,
@@ -287,6 +300,7 @@
 				F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */,
 				F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */,
 				F4D918472BA8FBD50039ADB8 /* LocationPickerViewController.swift in Sources */,
+				131ED10D2BC3AE8A00B48430 /* GroupSettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
