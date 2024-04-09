@@ -9,7 +9,7 @@ import UIKit
 
 class UpdateGroupViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var currGroup:GroupEntity?
+    var currGroup:Group?
     @IBOutlet weak var groupNameTitle: UILabel!
     @IBOutlet weak var groupNameField: UITextField!
     @IBOutlet weak var groupDescField: UITextField!
@@ -17,20 +17,19 @@ class UpdateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
     var groupName:String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        groupName = currGroup!.groupName
+        groupName = currGroup!.name
         // Do any additional setup after loading the view.
         groupNameField.delegate = self
         groupDescField.delegate = self
-        
+        groupNameField.text = groupName
         groupImageField.layer.cornerRadius = groupImageField.frame.size.width / 2
         groupImageField.clipsToBounds = true
-        if let imageData = currGroup!.groupImage {
-            let image = UIImage(data: imageData)
+        if let image = currGroup!.image {
             groupImageField.image = image
             groupImageField.contentMode = .scaleAspectFill
         }
-        groupNameField.text = currGroup!.groupName
-        groupDescField.text = currGroup!.groupDescription
+        groupNameField.text = currGroup!.name
+        groupDescField.text = currGroup!.description
         
     }
     
@@ -44,13 +43,13 @@ class UpdateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
     
     @IBAction func updateGroupButtonPressed(_ sender: Any) {
         guard let groupName = groupNameField.text, let groupDesc = groupDescField.text, let groupImage = groupImageField.image, let currGroup = currGroup else { return } // Update the properties of the currGroup object
-            currGroup.groupName = groupName
-            currGroup.groupDescription = groupDesc
+            currGroup.name = groupName
+            currGroup.description = groupDesc
             // Assuming groupImage is stored as Data in the groupImageField
-            currGroup.groupImage = groupImage.pngData()
+            currGroup.image = groupImage
             // Save the changes to the context
             do {
-                try currGroup.managedObjectContext?.save()
+                //try currGroup.managedObjectContext?.save()
                 let controller = UIAlertController(title: "Group saved", message: "Updated a group titled '\(groupName)' with description '\(groupDesc)'", preferredStyle: .alert)
                 controller.addAction(UIAlertAction(title: "OK", style: .default))
                 present(controller, animated: true)

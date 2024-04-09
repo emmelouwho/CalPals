@@ -15,7 +15,7 @@ class CreateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
     @IBOutlet weak var groupImageField: UIImageView!
     @IBOutlet weak var groupDescField: UITextField!
     var groupName: String = ""
-    var group: NSManagedObject?
+    var group: Group?
     
     var delegate: CreateGroupDelegate?
     
@@ -70,7 +70,7 @@ class CreateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
         if segue.identifier == "goToGroupSettingsSegue",
             let destination = segue.destination as? GroupSettingsViewController
         {
-            destination.currGroup = group as? GroupEntity
+            destination.currGroup = group
         }
     }
     

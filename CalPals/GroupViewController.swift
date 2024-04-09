@@ -7,12 +7,14 @@
 
 import UIKit
 import CoreData
+import FirebaseDatabase
+import FirebaseAuth
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
 protocol CreateGroupDelegate : AnyObject {
-    func addGroup(groupImage:UIImage, groupName: String, events:[String], groupDescription: String)->NSManagedObject
+    func addGroup(groupImage:UIImage, groupName: String, events:[String], groupDescription: String)->Group
 }
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateGroupDelegate {
@@ -20,8 +22,9 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noGroupsLabel: UILabel!
     
-    var groupList:[NSManagedObject] = []
+    var groupList:[Group] = []
     var selectedCellIndexPath: IndexPath?
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,22 +33,37 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
         tableView.delegate = self
         
-        groupList = retrieveGroups()
-        tableView.reloadData()
-        tableView.rowHeight = 120
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
+        noGroupsLabel.isHidden = true
+        
+        retrieveGroups { groups in
+            // Update the UI with the retrieved groups
+            // Make sure to do this on the main thread if you're updating the UI
+            DispatchQueue.main.async {
+                self.groupList = groups
+                if self.groupList.isEmpty {
+                    self.noGroupsLabel.isHidden = false
+                } else {
+                    self.noGroupsLabel.isHidden = true
+                }
+                self.tableView.reloadData()
+                self.tableView.rowHeight = 120
+                self.activityIndicator.stopAnimating()
+                self.tableView.isHidden = false
+                
+            }
+        }
+        
         
         // Create a UIBarButtonItem with a plus icon
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         // Set the UIBarButtonItem as the rightBarButtonItem of the navigation item
         navigationItem.rightBarButtonItem = addButton
         
-        groupList = retrieveGroups()
-        if groupList.isEmpty {
-            noGroupsLabel.isHidden = false
-        } else {
-            noGroupsLabel.isHidden = true
-        }
-        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,37 +71,67 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.reloadData()
       }
     
-    func addGroup(groupImage: UIImage, groupName: String, events: [String], groupDescription: String) ->NSManagedObject {
-        let group = NSEntityDescription.insertNewObject(forEntityName: "GroupEntity", into: context)
-        if let imageData = groupImage.pngData() {
-            group.setValue(imageData, forKey: "groupImage")
-        }
-        group.setValue(groupName, forKey: "groupName")
-        group.setValue(groupDescription, forKey: "groupDescription")
-        group.setValue(events, forKey: "events")
+    func addGroup(groupImage: UIImage, groupName: String, events: [String], groupDescription: String) -> Group{
+        let newGroup = Group(name: groupName, description: groupDescription, image: groupImage)
         
-        saveContext()
-        groupList = retrieveGroups()
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            newGroup.storeDataInFireBase(forUser: uid)
+        }
+        
+        
         if groupList.isEmpty {
             noGroupsLabel.isHidden = false
         } else {
             noGroupsLabel.isHidden = true
         }
         tableView.reloadData()
-        return group
+        return newGroup
     }
     
-    func retrieveGroups() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "GroupEntity")
-        var fetchedResults:[NSManagedObject]? = nil
-        do {
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-                print("Error with retrieving data")
-                abort()
+    func retrieveGroups(completion: @escaping ([Group]) -> Void) {
+        var groups: [Group] = []
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            let ref = Database.database().reference().child("users").child(uid).child("groups")
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists(), let groupsDict = snapshot.value as? [String: Any] {
+                    let groupIds = Array(groupsDict.keys)
+                    let dispatchGroup = DispatchGroup()
+                    
+                    for id in groupIds {
+                        dispatchGroup.enter() // Enter group
+                        let groupRef = Database.database().reference().child("groups").child(id)
+                        groupRef.observeSingleEvent(of: .value, with: { snapshot in
+                            if snapshot.exists(), let groupDict = snapshot.value as? [String: Any] {
+                                let newGroup = Group(
+                                    name: groupDict["name"] as? String ?? "Unknown",
+                                    description: groupDict["description"] as? String ?? "",
+                                    image: nil,
+                                    id: id
+                                )
+                                groups.append(newGroup)
+                            } else {
+                                print("Group not found")
+                            }
+                            dispatchGroup.leave() // Leave group
+                        })
+                    }
+                    
+                    // Call the completion handler once all group details have been fetched
+                    dispatchGroup.notify(queue: .main) {
+                        completion(groups)
+                    }
+                } else {
+                    print("No groups found for this user.")
+                    completion([]) // Return an empty array if no groups are found
+                }
+            })
+        } else {
+            completion([]) // Return an empty array if no user is logged in
         }
-        return (fetchedResults)!
     }
+
 
     @objc func addButtonTapped() {
         // Perform segue to the destination view controller
@@ -96,12 +144,13 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
-        let group = groupList[indexPath.row] as! GroupEntity
-        cell.textLabel?.text = group.groupName
+        let group = groupList[indexPath.row]
+        cell.textLabel?.text = group.name
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 75, height: 75)) // Adjust the frame as needed
-            if let imageData = group.groupImage, let image = UIImage(data: imageData) {
-                imageView.image = image
-            }
+//            if let imageData = group.groupImage, let image = UIImage(data: imageData) {
+//                imageView.image = image
+//            }
+        imageView.image = group.image
             imageView.layer.cornerRadius = imageView.frame.width / 2 // Make it a circle
             imageView.clipsToBounds = true // Clip to bounds
             cell.accessoryView = imageView // Set the image view as the accessory view of the cell
@@ -110,7 +159,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            context.delete(groupList[indexPath.row])
+            // TODO: fix
+            //context.delete(groupList[indexPath.row])
             groupList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             saveContext()
@@ -137,7 +187,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             destination.delegate = self
         } else if segue.identifier == "showGroupSettingsSegue",
-            let selectedGroup = sender as? GroupEntity,
+            let selectedGroup = sender as? Group,
             let destination = segue.destination as? GroupSettingsViewController {
             destination.currGroup = selectedGroup
         }
