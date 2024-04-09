@@ -1,27 +1,29 @@
 # Contributions:
 
-Andrea Aranda Ramos (Release: _%, Overall: 25%)
+Andrea Aranda Ramos (Release: 15%, Overall: 20%)
 - Schedule Page
+- Group Page
   
-Emme Erwin (Release: _%, Overall: 35%)
+Emme Erwin (Release: 35%, Overall: 32%)
 - Create Event Page
 - Tab View Controller
 - Locations on Create Event
 - Polishing Schedule Page & Storing in firebase
 
-Mahta Ghotbi (Release: _%, Overall: 15%)
+Mahta Ghotbi (Release: 20%, Overall: 20%)
 - Launch Screen
 - Profile Page
 - Setting Page
 
-Richie Wahidin (Release: _%, Overall: 25%)
+Richie Wahidin (Release: 30%, Overall: 28%)
 - Login / Sign Up Page 
 - Firebase setup
+- Group Page
 
 # Deviations:
-We have not been able to implement the sign-in through Google and Apple, but it will hopefully be included in the Beta submission.
+Events are not in Firebase at all yet but will hopefully be moved to Firebase by Final. Also slowly moving group information into Firebase. 
 
-We will be fine tuning scheduling at a later time since scrolling isn't seemless at the moment. The Table View with times does not scroll together with the Collection View but that will be fixed in the Beta sumbmission. Additionally, the days that go on top of the Collection View columns are also missing but will be present in the Beta submission.
+Groups and events are yet to be linked but should work together by Final.
 
-
+Edit username page will have more setting components in the next release. 
 
