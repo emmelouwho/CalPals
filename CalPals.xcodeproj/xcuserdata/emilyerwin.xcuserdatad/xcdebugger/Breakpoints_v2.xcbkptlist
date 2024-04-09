@@ -7,38 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EFEF6E5B-74A4-4886-B5D9-E43379F686AA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CalPals/Event.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "validateEvent()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AB3014CD-35D0-4CCA-BBAF-9FFD4A854092"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CalPals/CreateEventViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "createEventButtonPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E4D12F58-A235-436B-906D-CC49CBA1BF18"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,8 +14,8 @@
             filePath = "CalPals/Event.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "eventCreatedMessage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -146,106 +114,6 @@
             endingLineNumber = "14"
             landmarkName = "SchedulingViewController"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - 3c55d7325b005454"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "one-time initialization function for times"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/SchedulingViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14">
-               </Location>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - 6f349bdf7cba69e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CalPals.SchedulingViewController.collectionView.getter : Swift.Optional&lt;__C.UICollectionView&gt;"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/SchedulingViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0">
-               </Location>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - accf49077b15968a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CalPals.SchedulingViewController.collectionView.setter : Swift.Optional&lt;__C.UICollectionView&gt;"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/SchedulingViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0">
-               </Location>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - bddf54d3f17e6caf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CalPals.SchedulingViewController.collectionView.modify : Swift.Optional&lt;__C.UICollectionView&gt;"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/SchedulingViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14">
-               </Location>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - 4dcb2a17c165f5cd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CalPals.SchedulingViewController.collectionView.modify : Swift.Optional&lt;__C.UICollectionView&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0">
-               </Location>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - 62b079332e46483b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CalPals.SchedulingViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; CalPals.SchedulingViewController"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/SchedulingViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14">
-               </Location>
-               <Location
-                  uuid = "450D57E1-8B26-482C-916E-2D4E51B9511D - bff045bca0b3c1df"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CalPals.SchedulingViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CalPals.SchedulingViewController&gt;"
-                  moduleName = "CalPals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/SchedulingViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -262,6 +130,70 @@
             endingLineNumber = "19"
             landmarkName = "SchedulingViewController"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "289FA6AD-3BD3-4A54-B4B3-9A78FF935E85"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalPals/ScheduleTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "init(style:reuseIdentifier:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "119D2857-479C-4A3C-A163-65ED1599015D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalPals/ScheduleViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "createHeaderView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "256D9F24-AD7F-4D39-B3B4-53859FA2B707"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalPals/CreateEventViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "createEventButtonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DEEC7FBE-4F1D-4781-AAF8-1992281145A9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalPals/Event.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "validateEvent()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

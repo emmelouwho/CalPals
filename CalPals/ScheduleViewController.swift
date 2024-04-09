@@ -6,88 +6,160 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
-public let times = [
-    "12AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM",
-    "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM",
-    "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"
-]
-
-public let days = [
-    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-]
-
-class ScheduleViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var headerCollectionView: UICollectionView!
+    var activityIndicator: UIActivityIndicatorView!
+    var availabilityModel = AvailabilityModel()
+    var isInitiallyHighlighting: Bool = true
+    var lastToggledIndexPath: IndexPath?
+    var lastToggledSlot: Int?
     
     let textCellIdentifier = "TextCell"
     let headerCollectionCellIndentifier = "HeaderCollectionCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.allowsMultipleSelection = true
-        
+        tableView.rowHeight = 30.0
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
-        collectionView.delegate = self
+        // add gesture for table selection
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        tableView.addGestureRecognizer(longPressGesture)
         
-        collectionView.dataSource = self
+        // while loading data from firebase, show loading indicator and hide table
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
         
-        // delete border once im done
-        headerCollectionView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        headerCollectionView.layer.borderWidth = 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 336
-        // 24 hrs in a day and we want to select in 30 min intervals
-        // we actually need 336 selectable cells bc 24 x 2 = 48 x 7 = 336
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reuseID, for: indexPath)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.contentView.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        // if we have a current user, go get their scheduling data from the database
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            availabilityModel.addFirebaseDataToCurrent(forUser: uid) {
+                [weak self]  in
+                guard let strongSelf = self else { return }
+                strongSelf.tableView.reloadData()
+                strongSelf.activityIndicator.stopAnimating()
+                strongSelf.tableView.isHidden = false
+            }
+        } else {
+            activityIndicator.stopAnimating()
+            tableView.isHidden = false
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.contentView.backgroundColor = nil
+    func createHeaderView() -> UIView {
+        let headerView = UIView()
+        headerView.backgroundColor = .lightGray
+        
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add day labels to the stack view
+        for day in days {
+            let label = UILabel()
+            label.text = day
+            label.textAlignment = .center
+            stackView.addArrangedSubview(label)
         }
+        headerView.addSubview(stackView)
+        
+        // Set stackView constraints
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: headerView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 60),
+            stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15)
+        ])
+        
+        return headerView
     }
-    
-    // change the table view to collection view?
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return times.count
+        return 48
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-        let row = indexPath.row
-        cell.textLabel?.text = times[row]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
+        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath) as! ScheduleTableViewCell
+
+        let hour24 = indexPath.row / 2
+        var hour = hour24 > 12 ? hour24 - 12 : hour24
+        if hour == 0 {
+            hour = 12
+        }
+        let timeOfDay = hour24 < 12 ? "AM" : "PM"
+        
+        if indexPath.row % 2 == 0 {
+            cell.timeLabel.text = String("\(hour) \(timeOfDay)")
+        } else {
+            cell.timeLabel.text = ""
+        }
+        
+        cell.timeLabel?.font = UIFont.systemFont(ofSize: 13)
+        
+        let highlights = availabilityModel.highlightsForIndexPath(indexPath)
+        cell.configureWithHighlights(highlights)
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let row = indexPath.row
-        print(times[row])
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return createHeaderView()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 43
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
-
+    
+    @objc func handleLongPressGesture(_ gesture: UIGestureRecognizer) {
+        let location = gesture.location(in: tableView)
+        if let indexPath = tableView.indexPathForRow(at: location),
+           let cell = tableView.cellForRow(at: indexPath) as? ScheduleTableViewCell {
+            let cellLocation = tableView.convert(location, to: cell)
+            
+            if gesture.state == .began {
+                if let slotIndex = cell.timeSlotIndex(at: cellLocation) {
+                    // Determine the initial action based on the slot's current state
+                    isInitiallyHighlighting = !availabilityModel.isSlotHighlighted(at: indexPath, slot: slotIndex)
+                    availabilityModel.toggleHighlight(at: indexPath, slot: slotIndex)
+                    lastToggledIndexPath = indexPath
+                    lastToggledSlot = slotIndex
+                    tableView.reloadRows(at: [indexPath], with: .none)
+                }
+            } else if gesture.state == .changed {
+                if let slotIndex = cell.timeSlotIndex(at: cellLocation),
+                   !(indexPath == lastToggledIndexPath && slotIndex == lastToggledSlot) {
+                    // Only toggle if we've moved to a new slot
+                    if isInitiallyHighlighting {
+                        availabilityModel.highlightSlot(at: indexPath, slot: slotIndex)
+                    } else {
+                        availabilityModel.removeHighlight(at: indexPath, slot: slotIndex)
+                    }
+                    lastToggledIndexPath = indexPath
+                    lastToggledSlot = slotIndex
+                    tableView.reloadRows(at: [indexPath], with: .none)
+                }
+            } else if gesture.state == .ended || gesture.state == .cancelled {
+                // Reset tracking properties
+                lastToggledIndexPath = nil
+                lastToggledSlot = nil
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            availabilityModel.storeDataInFireBase(forUser: uid)
+        }
+    }
 }

@@ -7,30 +7,39 @@
 
 import Foundation
 
-let repeatOptions = ["Never", "Once a Week", "Once a Month", "Annualy"]
-
 class Event {
     var name: String?
     var loc: String?
     var group: String?
     var description: String?
     
-    var startDate = Date()
-    var endDate = Date()
+    var dayOptions: [String: Bool] = [
+        "Sun": false, "Mon": false, "Tue": false, "Wed": false, "Thu": false, "Fri": false, "Sat": false
+    ]
     
-    var noEarlierThan = Date()
-    var noLaterThan = Date()
+    var noEarlierThan: String = "12AM"
+    var noLaterThan: String = "11PM"
     
-    var duration = 0
-    var repeats = "Never"
+    var duration: String = "30 min"
     
     func setBasic(name: String?, location: String?, group: String?, description: String?, repeats: String? = "Never", duration: String){
         self.name = name
-        self.loc = location
+        self.loc = location == "Location" ? "" : location
         self.group = group
         self.description = description
-        self.duration = Int(duration) ?? 0
-        self.repeats = repeats ?? "Never"
+        self.duration = duration
+    }
+    
+    func setDays(mon: Bool, tue: Bool, wed: Bool, thu: Bool, fri: Bool, sat: Bool, sun: Bool) {
+        dayOptions = [
+            "Sun": sun,
+            "Mon": mon,
+            "Tue": tue,
+            "Wed": wed,
+            "Thu": thu,
+            "Fri": fri,
+            "Sat": sat
+        ]
     }
     
     func validateEvent() -> String{
@@ -40,21 +49,21 @@ class Event {
         if group == nil {
             return "Must select a group. If you have no groups to choose from, please create a group."
         }
-        if startDate > endDate {
-            return "Start date must be before end date"
+        if let startIndex = allTimes.firstIndex(of: noEarlierThan),
+           let endIndex = allTimes.firstIndex(of: noLaterThan) {
+            if startIndex > endIndex {
+                return "No later than time must be before no earlier time"
+            }
         }
-        if noEarlierThan > noLaterThan {
-            return "No later than time must be before no earlier time"
-        }
-        if duration <= 0 {
-            return "Duration must be greater than 0 and must be a whole number"
+        let hasOneDaySelected = dayOptions.contains { $0.value == true }
+        if !hasOneDaySelected {
+            return "Must choose at least one day"
         }
         
-        let difference = Calendar.current.dateComponents([.minute], from: noEarlierThan, to: noLaterThan).minute ?? 0
-        if difference < duration {
+        let doesFit = doesDurationFit(noEarlierThan: noEarlierThan, noLaterThan: noLaterThan, durationString: duration)
+        if !doesFit {
             return "The amount of time between no earlier than time and no later time must be long enough to fit the duration"
         }
-        
         
         return ""
     }
@@ -67,8 +76,43 @@ class Event {
         if loc != "" && loc != nil {
             result += " @ \(loc ?? "")"
         }
-        result += "\n\(formatter.string(from: startDate)) - \(formatter.string(from: endDate)) for \(duration) minutes"
+        let daysOfWeek = dayOptions.filter { $0.value }.map { $0.key }.joined(separator: ", ")
+        result += "\n\(daysOfWeek) for \(duration)"
         
         return result
     }
+    
+    // Calculate duration in minutes
+    func durationInMinutes(durationString: String) -> Int {
+        let parts = durationString.split(separator: " ")
+        var minutes = 0
+        for i in 0..<parts.count {
+            if parts[i].contains("hr") {
+                if let hours = Int(parts[i-1]) {
+                    minutes += hours * 60
+                }
+            } else if parts[i].contains("min") {
+                if let mins = Int(parts[i-1]) {
+                    minutes += mins
+                }
+            }
+        }
+        return minutes
+    }
+
+    // Check if the duration fits between two times
+    func doesDurationFit(noEarlierThan: String, noLaterThan: String, durationString: String) -> Bool {
+        guard let startIndex = allTimes.firstIndex(of: noEarlierThan),
+              let endIndex = allTimes.firstIndex(of: noLaterThan) else {
+            return false
+        }
+
+        let duration = durationInMinutes(durationString: durationString)
+        // Calculate the end index based on duration
+        let durationIndexSteps = duration / 30
+
+        // Check if adding the duration goes beyond noLaterThan
+        return startIndex + durationIndexSteps <= endIndex
+    }
+
 }
