@@ -78,8 +78,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let uid = user.uid
             newGroup.storeDataInFireBase(forUser: uid)
         }
-        
-        
+        groupList.append(newGroup)
         if groupList.isEmpty {
             noGroupsLabel.isHidden = false
         } else {

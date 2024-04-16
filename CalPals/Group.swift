@@ -32,6 +32,8 @@ class Group {
     func storeDataInFireBase(forUser uid: String){
         var groupDict = ["name": name, "description": description]
         let ref = Database.database().reference()
+        
+        // storing all group data in the groups tab
         ref.child("groups").child(id).setValue(groupDict){ error, reference in
             if let error = error {
                 print("Data could not be saved: \(error.localizedDescription)")
@@ -40,7 +42,8 @@ class Group {
             }
         }
         
-        ref.child("users").child(uid).child("groups").child(id).setValue(id){ error, reference in
+        // storing group name in the users tab
+        ref.child("users").child(uid).child("groups").child(id).setValue(name){ error, reference in
             if let error = error {
                 print("Data could not be saved: \(error.localizedDescription)")
             } else {

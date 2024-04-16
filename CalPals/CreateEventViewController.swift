@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabaseInternal
 
 class CreateEventViewController: UIViewController, LocationChanger {
     var newEvent = Event()
@@ -81,12 +83,38 @@ class CreateEventViewController: UIViewController, LocationChanger {
     
     func groupSetUp() {
         let optionClosure = {(action: UIAction) in print(action.title)}
-        let groupOptions = ["group 1", "group 2", "group 3"]
-        let actions = groupOptions.map { title in
-            UIAction(title: title, handler: optionClosure)
+        retrieveGroups() { [weak self] groups in
+            guard let strongSelf = self else { return }
+            if groups.isEmpty {
+                let controller = UIAlertController(title: "No groups", message: "Please create a group before creating an event", preferredStyle: .alert)
+                controller.addAction(UIAlertAction(title: "OK", style: .default))
+                strongSelf.present(controller,animated: true)
+            } else {
+                let actions = groups.map { title in
+                    UIAction(title: title, handler: optionClosure)
+                }
+                strongSelf.groupButton.menu = UIMenu(children: actions)
+            }
         }
-        
-        groupButton.menu = UIMenu(children: actions)
+    }
+    
+    func retrieveGroups(completion: @escaping ([String]) -> Void) {
+        var groups: [String] = []
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            let ref = Database.database().reference().child("users").child(uid).child("groups")
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists(), let groupsDict = snapshot.value as? [String: Any] {
+                    groups = groupsDict.values.compactMap { $0 as? String }
+                    completion(groups)
+                } else {
+                    print("No groups found for this user.")
+                    completion([]) // Return an empty array if no groups are found
+                }
+            })
+        } else {
+            completion([]) // Return an empty array if no user is logged in
+        }
     }
     
     func durationSetUp() {
