@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class UpdateGroupViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -43,22 +44,20 @@ class UpdateGroupViewController: UIViewController, UITextFieldDelegate, UIImageP
     
     @IBAction func updateGroupButtonPressed(_ sender: Any) {
         guard let groupName = groupNameField.text, let groupDesc = groupDescField.text, let groupImage = groupImageField.image, let currGroup = currGroup else { return } // Update the properties of the currGroup object
-            currGroup.name = groupName
-            currGroup.description = groupDesc
-            // Assuming groupImage is stored as Data in the groupImageField
-            currGroup.image = groupImage
-            // Save the changes to the context
-            do {
-                //try currGroup.managedObjectContext?.save()
-                let controller = UIAlertController(title: "Group saved", message: "Updated a group titled '\(groupName)' with description '\(groupDesc)'", preferredStyle: .alert)
-                controller.addAction(UIAlertAction(title: "OK", style: .default))
-                present(controller, animated: true)
-                // Dismiss or navigate to another screen
-                performSegue(withIdentifier: "backToGroupSettingsSegue", sender: self)
-            } catch {
-                // Handle the error
-                print("Error saving group: \(error.localizedDescription)")
-            }
+        currGroup.name = groupName
+        currGroup.description = groupDesc
+        currGroup.image = groupImage
+            
+        // Save the changes to firebase
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            currGroup.storeDataInFireBase(forUser: uid)
+        }
+        let controller = UIAlertController(title: "Group saved", message: "Updated a group titled '\(groupName)' with description '\(groupDesc)'", preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "OK", style: .default))
+        present(controller, animated: true)
+        // Dismiss or navigate to another screen
+        performSegue(withIdentifier: "backToGroupSettingsSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

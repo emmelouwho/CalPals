@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -87,37 +88,68 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.reloadData()
         return newGroup
     }
-    
+
     func retrieveGroups(completion: @escaping ([Group]) -> Void) {
         var groups: [Group] = []
         if let user = Auth.auth().currentUser {
             let uid = user.uid
             let ref = Database.database().reference().child("users").child(uid).child("groups")
+            // we are getting all the group ids listed under the current user
             ref.observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists(), let groupsDict = snapshot.value as? [String: Any] {
                     let groupIds = Array(groupsDict.keys)
                     let dispatchGroup = DispatchGroup()
                     
+                    // for each group, get all the infomation
                     for id in groupIds {
-                        dispatchGroup.enter() // Enter group
+                        dispatchGroup.enter()
                         let groupRef = Database.database().reference().child("groups").child(id)
+                        // get that groups info from firebase
                         groupRef.observeSingleEvent(of: .value, with: { snapshot in
                             if snapshot.exists(), let groupDict = snapshot.value as? [String: Any] {
-                                let newGroup = Group(
-                                    name: groupDict["name"] as? String ?? "Unknown",
-                                    description: groupDict["description"] as? String ?? "",
-                                    image: nil,
-                                    id: id
-                                )
-                                groups.append(newGroup)
+                                // now we are getting the group's image from storage
+                                let imageRef = Storage.storage().reference().child("images/\(id).jpg")
+                                dispatchGroup.enter()
+                                imageRef.downloadURL { result in
+                                    switch result {
+                                    case .success(let url):
+                                        // Download the image data
+                                        URLSession.shared.dataTask(with: url) { data, response, error in
+                                            var image: UIImage? = nil
+                                            if let data = data {
+                                                image = UIImage(data: data)
+                                            }
+                                            // Create the group once the image is downloaded
+                                            let newGroup = Group(
+                                                name: groupDict["name"] as? String,
+                                                description: groupDict["description"] as? String,
+                                                image: image,
+                                                id: id
+                                            )
+                                            groups.append(newGroup)
+                                            dispatchGroup.leave() // Leave after processing image
+                                        }.resume() // Start the download task
+                                    case .failure(let error):
+                                        // Handle error or no URL case
+                                        let newGroup = Group(
+                                            name: groupDict["name"] as? String ?? "Unknown",
+                                            description: groupDict["description"] as? String ?? "",
+                                            image: nil,
+                                            id: id
+                                        )
+                                        groups.append(newGroup)
+                                        dispatchGroup.leave()
+                                    }
+                                }
                             } else {
                                 print("Group not found")
                             }
-                            dispatchGroup.leave() // Leave group
+                            // Leave group after fetching group details
+                            dispatchGroup.leave()
                         })
                     }
                     
-                    // Call the completion handler once all group details have been fetched
+                    // Call the completion handler once all group details and images have been fetched
                     dispatchGroup.notify(queue: .main) {
                         completion(groups)
                     }
@@ -130,7 +162,6 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             completion([]) // Return an empty array if no user is logged in
         }
     }
-
 
     @objc func addButtonTapped() {
         // Perform segue to the destination view controller

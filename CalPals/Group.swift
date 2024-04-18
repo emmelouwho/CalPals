@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import FirebaseDatabaseInternal
+import FirebaseStorage
 
 
 class Group {
@@ -17,7 +18,7 @@ class Group {
     var image: UIImage!
     var events: [Event] = []
     
-    init(name: String!, description: String!, image: UIImage!, id: String? = nil) {
+    init(name: String!, description: String!, image: UIImage?, id: String? = nil) {
         self.id = id == nil ? generateRandomID(length: 8) : id
         self.name = name
         self.description = description
@@ -30,7 +31,7 @@ class Group {
     }
     
     func storeDataInFireBase(forUser uid: String){
-        var groupDict = ["name": name, "description": description]
+        let groupDict = ["name": name, "description": description]
         let ref = Database.database().reference()
         
         // storing all group data in the groups tab
@@ -48,6 +49,19 @@ class Group {
                 print("Data could not be saved: \(error.localizedDescription)")
             } else {
                 print("Data saved successfully!")
+            }
+        }
+        
+        // storing image in storage
+        guard let imageData = image.jpegData(compressionQuality: 0.75) else {
+            print("Error: Could not convert UIImage to Data")
+            return
+        }
+        let imageRef = Storage.storage().reference().child("images/\(id ?? "1").jpg")
+        imageRef.putData(imageData, metadata: nil) { metadata, error in
+            guard metadata != nil else {
+                print("Error occurred: \(error?.localizedDescription ?? "Unknown error")")
+                return
             }
         }
     }
