@@ -25,11 +25,6 @@ class Group {
         self.image = image
     }
     
-    func generateRandomID(length: Int) -> String {
-        let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).compactMap{ _ in characters.randomElement() })
-    }
-    
     func storeDataInFireBase(forUser uid: String){
         let groupDict = ["name": name, "description": description]
         let ref = Database.database().reference()

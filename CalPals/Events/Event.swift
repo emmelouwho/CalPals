@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import FirebaseDatabaseInternal
 
 class Event {
+    var id: String!
     var name: String?
     var loc: String?
     var group: String?
+    var groupId: String?
     var description: String?
     
     var dayOptions: [String: Bool] = [
@@ -28,6 +31,7 @@ class Event {
         self.group = group
         self.description = description
         self.duration = duration
+        self.id = generateRandomID(length: 8)
     }
     
     func setDays(mon: Bool, tue: Bool, wed: Bool, thu: Bool, fri: Bool, sat: Bool, sun: Bool) {
@@ -113,6 +117,28 @@ class Event {
 
         // Check if adding the duration goes beyond noLaterThan
         return startIndex + durationIndexSteps <= endIndex
+    }
+    
+    func storeDataInFireBase(for uid: String){
+        let eventDict = [
+            "name": name,
+            "loc": loc,
+            "description": description,
+            "group": group,
+            "days": dayOptions,
+            "noEarlierThan": noEarlierThan,
+            "noLaterThan": noLaterThan,
+            "duration": duration,
+        ] as [String : Any]
+        
+        let ref = Database.database().reference()
+        ref.child("groups").child(groupId!).child("events").child(id).setValue(eventDict){ error, reference in
+            if let error = error {
+                print("Data could not be saved: \(error.localizedDescription)")
+            } else {
+                print("Data saved successfully!")
+            }
+        }
     }
 
 }

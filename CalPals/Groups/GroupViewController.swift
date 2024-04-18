@@ -129,7 +129,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             groups.append(newGroup)
                                             dispatchGroup.leave() // Leave after processing image
                                         }.resume() // Start the download task
-                                    case .failure(let error):
+                                    case .failure(_):
                                         // Handle error or no URL case
                                         let newGroup = Group(
                                             name: groupDict["name"] as? String ?? "Unknown",
