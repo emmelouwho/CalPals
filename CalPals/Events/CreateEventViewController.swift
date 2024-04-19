@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabaseInternal
 
 class CreateEventViewController: UIViewController, LocationChanger {
     var newEvent = Event()
@@ -81,12 +83,41 @@ class CreateEventViewController: UIViewController, LocationChanger {
     
     func groupSetUp() {
         let optionClosure = {(action: UIAction) in print(action.title)}
-        let groupOptions = ["group 1", "group 2", "group 3"]
-        let actions = groupOptions.map { title in
-            UIAction(title: title, handler: optionClosure)
+        retrieveGroups() { [weak self] groups in
+            guard let strongSelf = self else { return }
+            if groups.isEmpty {
+                let controller = UIAlertController(title: "No groups", message: "Please create a group before creating an event", preferredStyle: .alert)
+                controller.addAction(UIAlertAction(title: "OK", style: .default))
+                strongSelf.present(controller,animated: true)
+            } else {
+                strongSelf.newEvent.groupId = groups[0].id
+                let actions = groups.map { group -> UIAction in
+                    return UIAction(title: group.name) { action in
+                        strongSelf.newEvent.groupId = group.id
+                    }
+                }
+                strongSelf.groupButton.menu = UIMenu(children: actions)
+            }
         }
-        
-        groupButton.menu = UIMenu(children: actions)
+    }
+    
+    func retrieveGroups(completion: @escaping ([(name: String, id: String)]) -> Void) {
+        var groups: [(name: String, id: String)] = []
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            let ref = Database.database().reference().child("users").child(uid).child("groups")
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists(), let groupsDict = snapshot.value as? [String: Any] {
+                    groups = groupsDict.map { (id: $0.key, name: $0.value as? String ?? "Unknown") }
+                                    completion(groups)
+                } else {
+                    print("No groups found for this user.")
+                    completion([]) // Return an empty array if no groups are found
+                }
+            })
+        } else {
+            completion([]) // Return an empty array if no user is logged in
+        }
     }
     
     func durationSetUp() {
@@ -128,6 +159,12 @@ class CreateEventViewController: UIViewController, LocationChanger {
             controller.addAction(UIAlertAction(title: "OK", style: .default))
             present(controller,animated: true)
         } else {
+            // add to firebase
+            if let user = Auth.auth().currentUser {
+                let uid = user.uid
+                newEvent.storeDataInFireBase(for: uid)
+            }
+
             let controller = UIAlertController(title: "Event Successfully Created!", message: newEvent.eventCreatedMessage(), preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "OK", style: .default) {_ in self.viewDidLoad()})
             present(controller,animated: true)

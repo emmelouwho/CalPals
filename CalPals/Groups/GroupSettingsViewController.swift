@@ -11,23 +11,22 @@ import CoreData
 class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var eventTableView: UITableView!
-    var currGroup:GroupEntity?
+    var currGroup:Group?
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var groupImage: UIImageView!
     @IBOutlet weak var noEventsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        groupNameLabel.text = currGroup!.groupName
-        if let imageData = currGroup!.groupImage {
-            let image = UIImage(data: imageData)
+        groupNameLabel.text = currGroup!.name
+        if let image = currGroup!.image {
             groupImage.image = image
             groupImage.contentMode = .scaleAspectFill
         }
         groupImage.layer.cornerRadius = groupImage.frame.size.width / 2
         groupImage.clipsToBounds = true
         // Do any additional setup after loading the view.
-        if let groupName = currGroup?.groupName {
+        if let groupName = currGroup?.name {
             noEventsLabel.text = "\(groupName) has no events. Go to the Add Tab to create an event."
         } else {
             noEventsLabel.text = "This group has no events. Go to the Add Tab to create an event."
@@ -36,15 +35,14 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        groupNameLabel.text = currGroup!.groupName
-        if let imageData = currGroup!.groupImage {
-            let image = UIImage(data: imageData)
+        groupNameLabel.text = currGroup!.name
+        if let image = currGroup!.image {
             groupImage.image = image
             groupImage.contentMode = .scaleAspectFill
         }
         groupImage.layer.cornerRadius = groupImage.frame.size.width / 2
         groupImage.clipsToBounds = true
-        if let groupName = currGroup?.groupName {
+        if let groupName = currGroup?.name {
             noEventsLabel.text = "\(groupName) has no events. Go to the Add Tab to create an event."
         } else {
             noEventsLabel.text = "This group has no events. Go to the Add Tab to create an event."
@@ -81,7 +79,7 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
 
     
     @IBAction func addMembersPressed(_ sender: Any) {
-        guard let groupName = currGroup?.groupName else {
+        guard let groupName = currGroup?.name else {
             return
         }
         
