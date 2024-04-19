@@ -156,15 +156,13 @@
 			children = (
 				375A20932BA74DFE003ABF00 /* CalPal Pics */,
 				F411B8442B8D69A100CA789C /* AppDelegate.swift */,
-				37934CFB2BC4937E00EEE2A3 /* profileViewController.swift */,
-				37934CFD2BC493A300EEE2A3 /* editUsernameViewController.swift */,
 				F411B8462B8D69A100CA789C /* SceneDelegate.swift */,
 				F411B8482B8D69A100CA789C /* ViewController.swift */,
 				1338BC122BA7390700CA7215 /* GoogleService-Info.plist */,
 				F411B84A2B8D69A100CA789C /* Main.storyboard */,
 				3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */,
-				1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */,
-				1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */,
+				F428AF132BD1ECC80061C1C3 /* Profile */,
+				F428AF122BD1ECB20061C1C3 /* Login */,
 				F428AF112BD1EADC0061C1C3 /* Scheduling */,
 				F428AF0F2BD1EA7D0061C1C3 /* Utils */,
 				F428AF102BD1EA8F0061C1C3 /* Groups */,
@@ -217,6 +215,24 @@
 				F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */,
 			);
 			path = Scheduling;
+			sourceTree = "<group>";
+		};
+		F428AF122BD1ECB20061C1C3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */,
+				1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		F428AF132BD1ECC80061C1C3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				37934CFB2BC4937E00EEE2A3 /* profileViewController.swift */,
+				37934CFD2BC493A300EEE2A3 /* editUsernameViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
