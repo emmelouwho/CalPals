@@ -24,6 +24,44 @@ class Event {
     var noLaterThan: String = "11PM"
     
     var duration: String = "30 min"
+    init() {
+        
+    }
+    
+    init(eventDict: [String: Any], eventId: String, groupId: String){
+        if let name = eventDict["name"] as? String,
+           let loc = eventDict["loc"] as? String,
+           let group = eventDict["group"] as? String,
+           let description = eventDict["description"] as? String,
+           let dayOptions = eventDict["days"] as? [String: Bool],
+           let noEarlierThan = eventDict["noEarlierThan"] as? String,
+           let noLaterThan = eventDict["noLaterThan"] as? String,
+           let duration = eventDict["duration"] as? String {
+            self.id = eventId
+            self.name = name
+            self.loc = loc
+            self.group = group
+            self.groupId = groupId
+            self.description = description
+            self.dayOptions = dayOptions
+            self.noEarlierThan = noEarlierThan
+            self.noLaterThan = noLaterThan
+            self.duration = duration
+        }
+    }
+    
+    init(id: String!, name: String? = nil, loc: String? = nil, group: String? = nil, groupId: String? = nil, description: String? = nil, dayOptions: [String : Bool], noEarlierThan: String, noLaterThan: String, duration: String) {
+        self.id = id
+        self.name = name
+        self.loc = loc
+        self.group = group
+        self.groupId = groupId
+        self.description = description
+        self.dayOptions = dayOptions
+        self.noEarlierThan = noEarlierThan
+        self.noLaterThan = noLaterThan
+        self.duration = duration
+    }
     
     func setBasic(name: String?, location: String?, group: String?, description: String?, repeats: String? = "Never", duration: String){
         self.name = name

@@ -107,6 +107,16 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         // get that groups info from firebase
                         groupRef.observeSingleEvent(of: .value, with: { snapshot in
                             if snapshot.exists(), let groupDict = snapshot.value as? [String: Any] {
+                                var events: [Event] = []
+                                if let eventDict = groupDict["event"] as? [String: [String: Any]] {
+                                    for (key, value) in eventDict {
+                                        let newEvent = Event(eventDict: value, eventId: key, groupId: id)
+                                        // check eveything got set right
+                                        if newEvent.id == key{
+                                            events.append(newEvent)
+                                        }
+                                    }
+                                }
                                 // now we are getting the group's image from storage
                                 let imageRef = Storage.storage().reference().child("images/\(id).jpg")
                                 dispatchGroup.enter()
@@ -124,7 +134,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                                 name: groupDict["name"] as? String,
                                                 description: groupDict["description"] as? String,
                                                 image: image,
-                                                id: id
+                                                id: id,
+                                                events: events
                                             )
                                             groups.append(newGroup)
                                             dispatchGroup.leave() // Leave after processing image
