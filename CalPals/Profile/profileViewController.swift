@@ -178,12 +178,24 @@ class profileViewController: UIViewController {
     
     @IBAction func logoutPressed(_ sender: Any) {
         do {
-            try Auth.auth().signOut()
-            self.dismiss(animated: true)
-        } catch {
-            print("sign-out error")
-            
-        }
+                // Sign out the user from Firebase
+                try Auth.auth().signOut()
+                
+                // Update isLoggedIn attribute in Core Data
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let fetchRequest = NSFetchRequest<User>(entityName: "User")
+                fetchRequest.predicate = NSPredicate(format: "isLoggedIn == true")
+                let users = try context.fetch(fetchRequest)
+                for user in users {
+                    user.isLoggedIn = false
+                }
+                try context.save()
+                
+                // Dismiss the current view controller
+                self.dismiss(animated: true)
+            } catch {
+                print("Sign-out error: \(error)")
+            }
     }
     
     
