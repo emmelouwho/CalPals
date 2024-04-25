@@ -146,7 +146,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                                 description: groupDict["description"] as? String,
                                                 image: image,
                                                 id: id,
-                                                events: events
+                                                events: events,
                                                 users: users
                                             )
                                             groups.append(newGroup)
