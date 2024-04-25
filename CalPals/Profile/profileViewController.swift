@@ -10,19 +10,15 @@ import FirebaseAuth
 import CoreData
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseDatabaseInternal
 
 class profileViewController: UIViewController {
 
-   
     @IBOutlet var profilePhoto: UIImageView!
-    
     @IBOutlet var userName: UILabel!
-    
-    
     @IBOutlet var emailLabel: UILabel!
     //@IBOutlet var groupNumberLabel: UILabel!
     @IBOutlet var memberSinceLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +30,6 @@ class profileViewController: UIViewController {
         displayProfileImage()
         profilePhoto.layer.cornerRadius = profilePhoto.frame.size.width / 2
         profilePhoto.clipsToBounds = true
-
-        // Do any additional setup after loading the view.
     }
     
     
@@ -46,18 +40,14 @@ class profileViewController: UIViewController {
     
     
     func fetchUsername() {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("User not logged in")
-            return
-        }
-        let db = Firestore.firestore()
-        db.collection("users").document(userID).getDocument { [weak self] document, error in
-            if let document = document, document.exists {
-                let username = document.data()?["username"] as? String ?? "No username set"
-                self?.userName.text = "\(username)"
-            } else {
-                print("Document does not exist")
-            }
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            let ref = Database.database().reference().child("users").child(uid).child("name")
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists(), let name = snapshot.value as? String {
+                    self.userName.text = name
+                }
+            })
         }
     }
     
@@ -163,19 +153,6 @@ class profileViewController: UIViewController {
             present(imagePickerController, animated: true, completion: nil)
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    
     @IBAction func logoutPressed(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -185,9 +162,6 @@ class profileViewController: UIViewController {
             
         }
     }
-    
-    
-
 }
 
 extension profileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

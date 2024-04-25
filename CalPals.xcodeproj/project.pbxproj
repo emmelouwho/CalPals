@@ -57,6 +57,8 @@
 		F43476CA2BC4B74A002834A3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43476C92BC4B74A002834A3 /* Group.swift */; };
 		F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */; };
 		F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */; };
+		F478D27E2BD6DEB400761313 /* InviteToGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478D27D2BD6DEB400761313 /* InviteToGroupViewController.swift */; };
+		F478D2802BD6DF8D00761313 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478D27F2BD6DF8D00761313 /* User.swift */; };
 		F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */; };
 		F49AA1192BC31FDF009CF1A8 /* TimeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */; };
 		F4D918432BA8C1FB0039ADB8 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */; };
@@ -91,6 +93,8 @@
 		F43476C92BC4B74A002834A3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
 		F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		F478D27D2BD6DEB400761313 /* InviteToGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteToGroupViewController.swift; sourceTree = "<group>"; };
+		F478D27F2BD6DF8D00761313 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F48C21B82BA9206100EDB9D4 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		F49AA1182BC31FDF009CF1A8 /* TimeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConstants.swift; sourceTree = "<group>"; };
 		F4D918422BA8C1FB0039ADB8 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				131ED10C2BC3AE8900B48430 /* GroupSettingsViewController.swift */,
+				F478D27D2BD6DEB400761313 /* InviteToGroupViewController.swift */,
 				131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */,
 				131ED10E2BC3B66500B48430 /* UpdateGroupViewController.swift */,
 				131ED0F92BBCB3EE00B48430 /* GroupViewController.swift */,
@@ -232,6 +237,7 @@
 		F428AF132BD1ECC80061C1C3 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F478D27F2BD6DF8D00761313 /* User.swift */,
 				37934CFB2BC4937E00EEE2A3 /* profileViewController.swift */,
 				37934CFD2BC493A300EEE2A3 /* editUsernameViewController.swift */,
 			);
@@ -343,11 +349,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F478D2802BD6DF8D00761313 /* User.swift in Sources */,
 				1338BC4E2BA7452900CA7215 /* CreateAccountViewController.swift in Sources */,
 				1338BC4B2BA73D3E00CA7215 /* LoginViewController.swift in Sources */,
 				37934CFC2BC4937E00EEE2A3 /* profileViewController.swift in Sources */,
 				F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */,
 				F43476CA2BC4B74A002834A3 /* Group.swift in Sources */,
+				F478D27E2BD6DEB400761313 /* InviteToGroupViewController.swift in Sources */,
 				F43476C82BC4B33E002834A3 /* CalPals.xcdatamodeld in Sources */,
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,

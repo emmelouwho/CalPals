@@ -17,6 +17,7 @@ class Group {
     var description: String!
     var image: UIImage!
     var events: [Event] = []
+    var users: [User] = []
     
     init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = []) {
         self.id = id == nil ? generateRandomID(length: 8) : id
@@ -27,7 +28,7 @@ class Group {
     }
     
     func storeDataInFireBase(forUser uid: String){
-        let groupDict = ["name": name, "description": description]
+        let groupDict = ["name": name, "description": description, "users": [[uid]: uid]] as [String : Any]
         let ref = Database.database().reference()
         
         // storing all group data in the groups tab
