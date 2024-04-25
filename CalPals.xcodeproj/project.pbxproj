@@ -356,7 +356,6 @@
 				F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */,
 				F43476CA2BC4B74A002834A3 /* Group.swift in Sources */,
 				F478D27E2BD6DEB400761313 /* InviteToGroupViewController.swift in Sources */,
-				F43476C82BC4B33E002834A3 /* CalPals.xcdatamodeld in Sources */,
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,
 				13227AA82BD8C0AF0081F099 /* CalPals.xcdatamodeld in Sources */,
