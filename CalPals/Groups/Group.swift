@@ -19,12 +19,13 @@ class Group {
     var events: [Event] = []
     var users: [User] = []
     
-    init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = []) {
+    init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = [], users: [User]? = []) {
         self.id = id == nil ? generateRandomID(length: 8) : id
         self.name = name
         self.description = description
         self.image = image
         self.events = events ?? []
+        self.users = users ?? []
     }
     
     func storeDataInFireBase(forUser uid: String){

@@ -63,8 +63,19 @@ class InviteToGroupViewController: UIViewController, UITableViewDataSource, UITa
     
     // MARK: search bar handling
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredUsers = searchText.isEmpty ? allUsers : allUsers.filter { user in
-            user.name.lowercased().contains(searchText.lowercased())
+        if searchText.isEmpty {
+            filteredUsers = allUsers
+        } else {
+            filteredUsers = allUsers.filter { user in
+                // Check if the user's name contains the search text
+                let matchesName = user.name.lowercased().contains(searchText.lowercased())
+
+                // check that the user is not already in the group
+                let isNotInGroup = !currGroup.users.contains { groupUser in
+                    groupUser.id == user.id
+                }
+                return matchesName && isNotInGroup
+            }
         }
         tableView.reloadData()
     }
