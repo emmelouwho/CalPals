@@ -181,15 +181,13 @@ class profileViewController: UIViewController {
                 // Sign out the user from Firebase
                 try Auth.auth().signOut()
                 
-                // Update isLoggedIn attribute in Core Data
+                // Delete the user from Core Data
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                let fetchRequest = NSFetchRequest<User>(entityName: "User")
-                fetchRequest.predicate = NSPredicate(format: "isLoggedIn == true")
-                let users = try context.fetch(fetchRequest)
-                for user in users {
-                    user.isLoggedIn = false
+                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+                if let user = try context.fetch(fetchRequest).first {
+                    context.delete(user)
+                    try context.save()
                 }
-                try context.save()
                 
                 // Dismiss the current view controller
                 self.dismiss(animated: true)
