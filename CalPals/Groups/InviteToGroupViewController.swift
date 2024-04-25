@@ -14,8 +14,8 @@ class InviteToGroupViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     var activityIndicator: UIActivityIndicatorView!
-    var allUsers: [User] = []
-    var filteredUsers: [User] = []
+    var allUsers: [UserInfo] = []
+    var filteredUsers: [UserInfo] = []
     var currGroup: Group!
     
     override func viewDidLoad() {
@@ -30,8 +30,8 @@ class InviteToGroupViewController: UIViewController, UITableViewDataSource, UITa
         activityIndicator.startAnimating()
         tableView.isHidden = true
         
-        retrieveUsers { events in
-            self.allUsers = events
+        retrieveUsers { users in
+            self.allUsers = users
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.activityIndicator.stopAnimating()
@@ -42,14 +42,14 @@ class InviteToGroupViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     // MARK: firebase handling
-    func retrieveUsers(completion: @escaping ([User]) -> Void) {
-        var users: [User] = []
+    func retrieveUsers(completion: @escaping ([UserInfo]) -> Void) {
+        var users: [UserInfo] = []
         let ref = Database.database().reference().child("users")
         ref.observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists(), let usersDict = snapshot.value as? [String: [String: Any]] {
                 for (key, value) in usersDict {
                     if let username = value["name"] as? String {
-                        let newUser = User(name: username, id: key)
+                        let newUser = UserInfo(name: username, id: key)
                         users.append(newUser)
                     }
                 }
@@ -63,19 +63,15 @@ class InviteToGroupViewController: UIViewController, UITableViewDataSource, UITa
     
     // MARK: search bar handling
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            filteredUsers = allUsers
-        } else {
-            filteredUsers = allUsers.filter { user in
-                // Check if the user's name contains the search text
-                let matchesName = user.name.lowercased().contains(searchText.lowercased())
+       filteredUsers = allUsers.filter { user in
+            // Check if the user's name contains the search text
+            let matchesName = user.name.lowercased().contains(searchText.lowercased())
 
-                // check that the user is not already in the group
-                let isNotInGroup = !currGroup.users.contains { groupUser in
-                    groupUser.id == user.id
-                }
-                return matchesName && isNotInGroup
+            // check that the user is not already in the group
+            let isNotInGroup = !currGroup.users.contains { groupUser in
+                groupUser.id == user.id
             }
+            return matchesName && isNotInGroup
         }
         tableView.reloadData()
     }

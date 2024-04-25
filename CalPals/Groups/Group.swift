@@ -17,9 +17,9 @@ class Group {
     var description: String!
     var image: UIImage!
     var events: [Event] = []
-    var users: [User] = []
+    var users: [UserInfo] = []
     
-    init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = [], users: [User]? = []) {
+    init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = [], users: [UserInfo]? = []) {
         self.id = id == nil ? generateRandomID(length: 8) : id
         self.name = name
         self.description = description

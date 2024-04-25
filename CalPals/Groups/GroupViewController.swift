@@ -117,10 +117,10 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         }
                                     }
                                 }
-                                var users: [User] = []
+                                var users: [UserInfo] = []
                                 if let userDict = groupDict["users"] as? [String: String] {
                                     for (key, value) in userDict {
-                                        let newUser = User(name: value, id: key)
+                                        let newUser = UserInfo(name: value, id: key)
                                         // check eveything got set right
                                         if newUser.id == key{
                                             users.append(newUser)

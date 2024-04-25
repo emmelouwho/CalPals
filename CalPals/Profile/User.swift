@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User {
+class UserInfo {
     var name: String
     var id: String
     
