@@ -213,7 +213,7 @@
             <objects>
                 <viewController id="Def-L5-q7c" customClass="GroupSettingsViewController" customModule="CalPals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IWy-r4-KJL">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6e-Yt-EkM">
@@ -315,7 +315,8 @@
                                     <color key="baseForegroundColor" red="0.48627450979999998" green="0.56862745100000001" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="cnp-Uh-uE4" kind="presentation" modalPresentationStyle="fullScreen" id="MHn-YA-cGk"/>
+                                    <action selector="createAccountButtonPressed:" destination="BxB-6f-Eox" eventType="touchUpInside" id="mQc-GX-n8z"/>
+                                    <segue destination="cnp-Uh-uE4" kind="presentation" identifier="goToCreatePageSegue" modalPresentationStyle="fullScreen" id="MHn-YA-cGk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uj2-46-PVm">
@@ -1020,7 +1021,7 @@
             <objects>
                 <viewController id="X4t-w3-Mi1" customClass="UpdateGroupViewController" customModule="CalPals" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Y3-d8-S6A">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hyi-3s-hgO">
@@ -1173,17 +1174,17 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="KtZ-ow-Aug"/>
-        <segue reference="Zr8-R2-3Jr"/>
+        <segue reference="2wB-aX-RC8"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.34509803919999998" green="0.50588235290000005" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="Add members" width="50" height="52"/>
         <image name="PuzzlePieces" width="200" height="240"/>
-        <image name="calendar" catalog="system" width="128" height="107"/>
-        <image name="list.clipboard" catalog="system" width="98" height="128"/>
-        <image name="person" catalog="system" width="128" height="121"/>
-        <image name="person.3" catalog="system" width="128" height="66"/>
-        <image name="plus.app" catalog="system" width="128" height="114"/>
+        <image name="calendar" catalog="system" width="32" height="32"/>
+        <image name="list.clipboard" catalog="system" width="32" height="32"/>
+        <image name="person" catalog="system" width="32" height="32"/>
+        <image name="person.3" catalog="system" width="32" height="32"/>
+        <image name="plus.app" catalog="system" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

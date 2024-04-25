@@ -11,6 +11,7 @@
 		131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */; };
 		131ED10D2BC3AE8A00B48430 /* GroupSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED10C2BC3AE8900B48430 /* GroupSettingsViewController.swift */; };
 		131ED10F2BC3B66600B48430 /* UpdateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131ED10E2BC3B66500B48430 /* UpdateGroupViewController.swift */; };
+		13227AA82BD8C0AF0081F099 /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13227AA62BD8C0AF0081F099 /* CalPals.xcdatamodeld */; };
 		1338BC132BA7390800CA7215 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1338BC122BA7390700CA7215 /* GoogleService-Info.plist */; };
 		1338BC152BA73CB100CA7215 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC142BA73CB100CA7215 /* FirebaseAnalytics */; };
 		1338BC172BA73CB100CA7215 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 1338BC162BA73CB100CA7215 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -53,7 +54,6 @@
 		F411B84E2B8D69A300CA789C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F411B84D2B8D69A300CA789C /* Assets.xcassets */; };
 		F428AF0D2BD1E6040061C1C3 /* generateId.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428AF0C2BD1E6040061C1C3 /* generateId.swift */; };
 		F428AF152BD1ED420061C1C3 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428AF142BD1ED420061C1C3 /* EventsViewController.swift */; };
-		F43476C82BC4B33E002834A3 /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F43476C62BC4B33E002834A3 /* CalPals.xcdatamodeld */; };
 		F43476CA2BC4B74A002834A3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43476C92BC4B74A002834A3 /* Group.swift */; };
 		F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */; };
 		F4766E0C2BB388ED0083D1B9 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */; };
@@ -72,6 +72,7 @@
 		131ED0FB2BBCB4AB00B48430 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		131ED10C2BC3AE8900B48430 /* GroupSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSettingsViewController.swift; sourceTree = "<group>"; };
 		131ED10E2BC3B66500B48430 /* UpdateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGroupViewController.swift; sourceTree = "<group>"; };
+		13227AA72BD8C0AF0081F099 /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
 		1338BC122BA7390700CA7215 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		F411B8522B8D69A300CA789C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F428AF0C2BD1E6040061C1C3 /* generateId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateId.swift; sourceTree = "<group>"; };
 		F428AF142BD1ED420061C1C3 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
-		F43476C72BC4B33E002834A3 /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
 		F43476C92BC4B74A002834A3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F44D057E2BB3A39D00C2322A /* AvailabilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityModel.swift; sourceTree = "<group>"; };
 		F4766E0B2BB388ED0083D1B9 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				F411B84D2B8D69A300CA789C /* Assets.xcassets */,
 				375A20992BA75D7B003ABF00 /* Launch Screen.storyboard */,
 				F411B8522B8D69A300CA789C /* Info.plist */,
-				F43476C62BC4B33E002834A3 /* CalPals.xcdatamodeld */,
+				13227AA62BD8C0AF0081F099 /* CalPals.xcdatamodeld */,
 			);
 			path = CalPals;
 			sourceTree = "<group>";
@@ -359,6 +359,7 @@
 				F43476C82BC4B33E002834A3 /* CalPals.xcdatamodeld in Sources */,
 				F411B8492B8D69A100CA789C /* ViewController.swift in Sources */,
 				F48C21B92BA9206200EDB9D4 /* ScheduleViewController.swift in Sources */,
+				13227AA82BD8C0AF0081F099 /* CalPals.xcdatamodeld in Sources */,
 				131ED0FC2BBCB4AB00B48430 /* CreateGroupViewController.swift in Sources */,
 				F44D057F2BB3A39D00C2322A /* AvailabilityModel.swift in Sources */,
 				F49AA1192BC31FDF009CF1A8 /* TimeConstants.swift in Sources */,
@@ -749,14 +750,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		F43476C62BC4B33E002834A3 /* CalPals.xcdatamodeld */ = {
+		13227AA62BD8C0AF0081F099 /* CalPals.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F43476C72BC4B33E002834A3 /* CalPals.xcdatamodel */,
+				13227AA72BD8C0AF0081F099 /* CalPals.xcdatamodel */,
 			);
-			currentVersion = F43476C72BC4B33E002834A3 /* CalPals.xcdatamodel */;
+			currentVersion = 13227AA72BD8C0AF0081F099 /* CalPals.xcdatamodel */;
 			name = CalPals.xcdatamodeld;
-			path = /Users/emilyerwin/Documents/School/Spring2024/iOS/CalPals/CalPals/CalPals.xcdatamodeld;
+			path = "/Users/richie/Documents/University/Spring 2024/C S 371L/CalPals/CalPals/CalPals.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

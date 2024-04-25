@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabaseInternal
 
-class CreateEventViewController: UIViewController, LocationChanger {
+class CreateEventViewController: UIViewController, LocationChanger, UITextFieldDelegate {
     var newEvent = Event()
     
     // MARK: - labels
@@ -46,6 +46,8 @@ class CreateEventViewController: UIViewController, LocationChanger {
         eventNameTextField.text = ""
         descriptionTextField.text = ""
         locationLabel.text = "Location"
+        eventNameTextField.delegate = self
+        descriptionTextField.delegate = self
         
         // styling added
         addBorder(label: groupLabel)
@@ -170,6 +172,17 @@ class CreateEventViewController: UIViewController, LocationChanger {
             present(controller,animated: true)
         }
         
+    }
+    
+    // Called when 'return' key pressed
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     // MARK: - handle segue for location
