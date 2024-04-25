@@ -76,21 +76,6 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
         
         return cell
     }
-
-    
-    @IBAction func addMembersPressed(_ sender: Any) {
-        guard let groupName = currGroup?.name else {
-            return
-        }
-        
-        let shareText = "Join our group \(groupName) on CalPals!"
-        let activityViewController = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
-        
-        activityViewController.excludedActivityTypes = nil
-        
-        present(activityViewController, animated: true, completion: nil)
-    }
-    
     
     @IBAction func updateGroupButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "updateGroupSegue", sender: self)
@@ -101,16 +86,8 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
             let destination = segue.destination as? UpdateGroupViewController
         {
             destination.currGroup = currGroup
+        } else if segue.identifier == "inviteGroupSegue",let destination = segue.destination as? InviteToGroupViewController {
+            destination.currGroup = currGroup
         }
     }
-    /*
-     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

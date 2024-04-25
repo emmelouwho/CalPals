@@ -117,6 +117,17 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         }
                                     }
                                 }
+                                var users: [UserInfo] = []
+                                if let userDict = groupDict["users"] as? [String: String] {
+                                    for (key, value) in userDict {
+                                        let newUser = UserInfo(name: value, id: key)
+                                        // check eveything got set right
+                                        if newUser.id == key{
+                                            users.append(newUser)
+                                        }
+                                    }
+                                }
+                                
                                 // now we are getting the group's image from storage
                                 let imageRef = Storage.storage().reference().child("images/\(id).jpg")
                                 dispatchGroup.enter()
@@ -135,7 +146,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                                 description: groupDict["description"] as? String,
                                                 image: image,
                                                 id: id,
-                                                events: events
+                                                events: events,
+                                                users: users
                                             )
                                             groups.append(newGroup)
                                             dispatchGroup.leave() // Leave after processing image
