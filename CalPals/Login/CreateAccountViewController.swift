@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabaseInternal
 
 class CreateAccountViewController: UIViewController {
 
@@ -60,17 +61,13 @@ class CreateAccountViewController: UIViewController {
             // User signed up successfully
             // Perform any additional actions, such as navigating to another view controller
             self.performSegue(withIdentifier: "signUpToTabSegue", sender: self)
+            
+            // add the user name to firebase
+            if let user = Auth.auth().currentUser {
+                let uid = user.uid
+                let ref = Database.database().reference().child("users").child(uid).child("name")
+                ref.setValue(email)
+            }
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

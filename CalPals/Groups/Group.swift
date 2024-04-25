@@ -17,17 +17,19 @@ class Group {
     var description: String!
     var image: UIImage!
     var events: [Event] = []
+    var users: [UserInfo] = []
     
-    init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = []) {
+    init(name: String!, description: String!, image: UIImage?, id: String? = nil, events: [Event]? = [], users: [UserInfo]? = []) {
         self.id = id == nil ? generateRandomID(length: 8) : id
         self.name = name
         self.description = description
         self.image = image
         self.events = events ?? []
+        self.users = users ?? []
     }
     
     func storeDataInFireBase(forUser uid: String){
-        let groupDict = ["name": name, "description": description]
+        let groupDict = ["name": name, "description": description, "users": [[uid]: uid]] as [String : Any]
         let ref = Database.database().reference()
         
         // storing all group data in the groups tab
