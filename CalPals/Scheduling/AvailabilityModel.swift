@@ -13,7 +13,7 @@ import FirebaseAuth
 class AvailabilityModel {
     // each row is the list of times they are avalible
     // basically a transverse of the scheduling page
-    private var availability: [[Bool]] = Array(repeating: Array(repeating: false, count: 48), count: 7)
+    var availability: [[Bool]] = Array(repeating: Array(repeating: false, count: 48), count: 7)
     
     func addFirebaseDataToCurrent(forUser uid: String, completion: @escaping () -> Void) {
         

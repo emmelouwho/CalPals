@@ -15,15 +15,14 @@ class Event {
     var group: String?
     var groupId: String?
     var description: String?
-    
     var dayOptions: [String: Bool] = [
         "Sun": false, "Mon": false, "Tue": false, "Wed": false, "Thu": false, "Fri": false, "Sat": false
     ]
-    
     var noEarlierThan: String = "12AM"
     var noLaterThan: String = "11PM"
-    
     var duration: String = "30 min"
+    var eventStart: String? = nil
+    
     init() {
         
     }
@@ -118,9 +117,13 @@ class Event {
         if loc != "" && loc != nil {
             result += " @ \(loc ?? "")"
         }
-        let daysOfWeek = dayOptions.filter { $0.value }.map { $0.key }.joined(separator: ", ")
-        result += "\n\(daysOfWeek) for \(duration)"
-        
+        if eventStart == nil {
+            let daysOfWeek = dayOptions.filter { $0.value }.map { $0.key }.joined(separator: ", ")
+            result += "\n\(daysOfWeek) for \(duration)"
+        } else {
+            result += "\n @ \(eventStart ?? "")"
+        }
+
         return result
     }
     
@@ -155,6 +158,95 @@ class Event {
 
         // Check if adding the duration goes beyond noLaterThan
         return startIndex + durationIndexSteps <= endIndex
+    }
+    
+    private func getAllAvailable(completion: @escaping ([AvailabilityModel]) -> Void) {
+        let ref = Database.database().reference().child("groups").child(groupId ?? "").child("users")
+        
+        var allAvailability: [AvailabilityModel] = []
+        let availabilityAccessQueue = DispatchQueue(label: "com.yourapp.availabilityAccessQueue", attributes: .concurrent)
+            
+        
+        ref.observeSingleEvent(of: .value, with: {snapshot in
+            if snapshot.exists(), let usersDict = snapshot.value as? [String: String] {
+                let userIds = Array(usersDict.keys)
+                let dispatchGroup = DispatchGroup()
+                
+                for id in userIds {
+                    dispatchGroup.enter()
+                    let a = AvailabilityModel()
+                    a.addFirebaseDataToCurrent(forUser: id) {
+                        availabilityAccessQueue.async(flags: .barrier) {
+                            allAvailability.append(a)
+                            dispatchGroup.leave()
+                        }
+                    }
+                }
+                dispatchGroup.notify(queue: .main) {
+                    completion(allAvailability)
+                }
+            } else {
+                completion([])
+            }
+        }) { error in
+            print("Firebase read error: \(error.localizedDescription)")
+            completion([])
+        }
+    }
+    
+    func findEventTime(completion: @escaping (String?) -> Void) {
+        getAllAvailable { allAvailability in
+            guard let startIndex = allTimes.firstIndex(of: self.noEarlierThan),
+                  let endIndex = allTimes.firstIndex(of: self.noLaterThan) else {
+                completion(nil)
+                return
+            }
+            let durationNum = self.durationInMinutes(durationString: self.duration)
+            let durationIndex = durationNum / 30
+            let slotsNeeded = durationIndex - startIndex
+            
+            // Loop through each potential start index within the valid range
+            for start in startIndex...(endIndex - slotsNeeded) {
+                var isAvailableForAll = true
+
+                // Check for each user
+                for user in allAvailability {
+                    var dayAvailableForAll = false
+
+                    // Check each day of the week
+                    for (dayIndex, isDayAllowed) in self.dayOptions.enumerated() where isDayAllowed.value {
+                        // Check if the day is allowed and the slots are available for that day
+                        if user.availability[dayIndex].count > start + slotsNeeded - 1, // Ensure there are enough slots in the day
+                           user.availability[dayIndex][start...(start + slotsNeeded - 1)].allSatisfy({ $0 }) {
+                            dayAvailableForAll = true
+                            break
+                        }
+                    }
+
+                    // If no suitable day was found for this user, set isAvailableForAll to false and break
+                    if !dayAvailableForAll {
+                        isAvailableForAll = false
+                        break
+                    }
+                }
+
+                // If all users are available on a valid day within the time range, return the time
+                if isAvailableForAll {
+                    completion(allTimes[start])
+                    return
+                }
+            }
+            completion(nil)
+        }
+    }
+    
+    func isConsecutiveAvailable(user: AvailabilityModel, start: Int, slotsNeeded: Int) -> Bool {
+        for i in start..<start + slotsNeeded {
+            if !user.isSlotHighlighted(at: IndexPath(row: i, section: 0), slot: 0) {
+                return false
+            }
+        }
+        return true
     }
     
     func storeDataInFireBase(for uid: String){
