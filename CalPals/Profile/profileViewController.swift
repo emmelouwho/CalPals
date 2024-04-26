@@ -14,7 +14,8 @@ import FirebaseDatabaseInternal
 
 class profileViewController: UIViewController {
 
-    @IBOutlet var profilePhoto: UIImageView!
+    @IBOutlet weak var profilePhoto: UIImageView!
+    
     @IBOutlet var userName: UILabel!
     @IBOutlet var emailLabel: UILabel!
     //@IBOutlet var groupNumberLabel: UILabel!
@@ -27,9 +28,13 @@ class profileViewController: UIViewController {
         displayCreationDate()
         
         profilePhoto.image = UIImage(named: "person")
-        displayProfileImage()
-        profilePhoto.layer.cornerRadius = profilePhoto.frame.size.width / 2
-        profilePhoto.clipsToBounds = true
+            displayProfileImage()
+            
+            let size = min(profilePhoto.frame.size.width, profilePhoto.frame.size.height)
+            profilePhoto.frame = CGRect(x: profilePhoto.frame.origin.x, y: profilePhoto.frame.origin.y, width: size, height: size)
+            profilePhoto.layer.cornerRadius = size / 2
+            profilePhoto.clipsToBounds = true
+        profilePhoto.contentMode = .scaleAspectFill
     }
     
     
