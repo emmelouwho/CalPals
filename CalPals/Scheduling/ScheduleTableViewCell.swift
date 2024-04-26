@@ -83,7 +83,7 @@ class ScheduleTableViewCell: UITableViewCell {
     func configureWithHighlights(_ highlights: Set<Int>) {
         for (index, slotView) in timeSlots.enumerated() {
             if highlights.contains(index) {
-                slotView.backgroundColor = .green
+                slotView.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
             } else {
                 slotView.backgroundColor = .clear
             }
