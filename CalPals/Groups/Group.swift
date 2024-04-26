@@ -29,7 +29,11 @@ class Group {
     }
     
     func storeDataInFireBase(forUser uid: String){
-        let groupDict = ["name": name, "description": description, "users": [[uid]: uid]] as [String : Any]
+        let groupDict = [
+            "name": name ?? "",
+            "description": description ?? "",
+            "users": [uid: uid]
+        ] as [String : Any]
         let ref = Database.database().reference()
         
         // storing all group data in the groups tab
