@@ -21,7 +21,7 @@ class Event {
     var noEarlierThan: String = "12AM"
     var noLaterThan: String = "11PM"
     var duration: String = "30 min"
-    var eventStart: String? = nil
+    var eventDetails: String? = nil
     
     init() {
         
@@ -117,11 +117,11 @@ class Event {
         if loc != "" && loc != nil {
             result += " @ \(loc ?? "")"
         }
-        if eventStart == nil {
+        if eventDetails == nil {
             let daysOfWeek = dayOptions.filter { $0.value }.map { $0.key }.joined(separator: ", ")
             result += "\n\(daysOfWeek) for \(duration)"
         } else {
-            result += "\n @ \(eventStart ?? "")"
+            result += "\n @ \(eventDetails ?? "")"
         }
 
         return result
@@ -202,47 +202,37 @@ class Event {
                 return
             }
             let durationNum = self.durationInMinutes(durationString: self.duration)
-            let durationIndex = durationNum / 30
-            let slotsNeeded = durationIndex - startIndex
+            let slotsNeeded = durationNum / 30
             
             // Loop through each potential start index within the valid range
             for start in startIndex...(endIndex - slotsNeeded) {
                 var isAvailableForAll = true
 
-                // Check for each user
-                for user in allAvailability {
-                    var dayAvailableForAll = false
-
-                    // Check each day of the week
-                    for (dayIndex, isDayAllowed) in self.dayOptions.enumerated() where isDayAllowed.value {
-                        // Check if the day is allowed and the slots are available for that day
-                        if user.availability[dayIndex].count > start + slotsNeeded - 1, // Ensure there are enough slots in the day
-                           user.availability[dayIndex][start...(start + slotsNeeded - 1)].allSatisfy({ $0 }) {
-                            dayAvailableForAll = true
-                            break
+                // Check each day of the week
+                for (day, isChecked) in self.dayOptions {
+                    if isChecked, let dayIndex = days.firstIndex(of: day) {
+                        // Check for each user
+                        for user in allAvailability {
+                            isAvailableForAll = isAvailableForAll && self.isConsecutiveAvailable(user: user, start: start, slotsNeeded: slotsNeeded, day: dayIndex)
+                        }
+                        
+                        // If all users are available on a valid day within the time range, return the time
+                        if isAvailableForAll {
+                            let time = "\(allTimes[start]) on \(day)"
+                            self.eventDetails = time
+                            completion(time)
+                            return
                         }
                     }
-
-                    // If no suitable day was found for this user, set isAvailableForAll to false and break
-                    if !dayAvailableForAll {
-                        isAvailableForAll = false
-                        break
-                    }
-                }
-
-                // If all users are available on a valid day within the time range, return the time
-                if isAvailableForAll {
-                    completion(allTimes[start])
-                    return
                 }
             }
             completion(nil)
         }
     }
     
-    func isConsecutiveAvailable(user: AvailabilityModel, start: Int, slotsNeeded: Int) -> Bool {
+    func isConsecutiveAvailable(user: AvailabilityModel, start: Int, slotsNeeded: Int, day: Int) -> Bool {
         for i in start..<start + slotsNeeded {
-            if !user.isSlotHighlighted(at: IndexPath(row: i, section: 0), slot: 0) {
+            if !user.isSlotHighlighted(at: IndexPath(row: i, section: day), slot: 0) {
                 return false
             }
         }
