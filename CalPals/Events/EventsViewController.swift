@@ -35,6 +35,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         fetchProfileImage()
         fetchUsername()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         retrieveEvents{ events in
             DispatchQueue.main.async {
                 self.events = events
