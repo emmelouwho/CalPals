@@ -28,6 +28,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.delegate = self
         
+        fetchUsername()
         retrieveEvents { events in
                 self.events = events
                 self.updateUIPostEventRetrieval()
