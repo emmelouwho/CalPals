@@ -28,8 +28,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.delegate = self
         
+        retrieveEvents { events in
+                self.events = events
+                self.updateUIPostEventRetrieval()
+        }
         setupActivityIndicator()
-        
     }
     
     private func setupActivityIndicator() {
