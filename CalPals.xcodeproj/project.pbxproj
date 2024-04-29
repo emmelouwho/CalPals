@@ -42,8 +42,7 @@
 		1338BC4B2BA73D3E00CA7215 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */; };
 		1338BC4E2BA7452900CA7215 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */; };
 		3009B0A52BA9180D00D9F31A /* CustomCollectionViewCell copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */; };
-		305C420A2BDF3C45008E890B /* GroupEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305C42092BDF3C44008E890B /* GroupEventTableViewCell.swift */; };
-		3077C9622BDEF0D700F59629 /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3077C9602BDEF0D700F59629 /* CalPals.xcdatamodeld */; };
+		3710D2622BDF27E300F8ADDB /* CalPals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3710D2602BDF27E300F8ADDB /* CalPals.xcdatamodeld */; };
 		375A20942BA74DFE003ABF00 /* CalPal Pics in Resources */ = {isa = PBXBuildFile; fileRef = 375A20932BA74DFE003ABF00 /* CalPal Pics */; };
 		375A209B2BA75D7B003ABF00 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375A20992BA75D7B003ABF00 /* Launch Screen.storyboard */; };
 		3788ED162BDB622C003EAEC4 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3788ED152BDB622C003EAEC4 /* EventTableViewCell.swift */; };
@@ -78,8 +77,8 @@
 		1338BC4A2BA73D3E00CA7215 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1338BC4D2BA7452900CA7215 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		3009B0A42BA9180D00D9F31A /* CustomCollectionViewCell copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CustomCollectionViewCell copy.swift"; sourceTree = "<group>"; };
-		305C42092BDF3C44008E890B /* GroupEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GroupEventTableViewCell.swift; path = CalPals/Groups/GroupEventTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		3077C9612BDEF0D700F59629 /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
+		3710D25F2BDF27D500F8ADDB /* CalPals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalPals.entitlements; sourceTree = "<group>"; };
+		3710D2612BDF27E300F8ADDB /* CalPals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalPals.xcdatamodel; sourceTree = "<group>"; };
 		375A20932BA74DFE003ABF00 /* CalPal Pics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "CalPal Pics"; sourceTree = "<group>"; };
 		375A209A2BA75D7B003ABF00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3788ED152BDB622C003EAEC4 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -178,6 +177,8 @@
 				F428AF102BD1EA8F0061C1C3 /* Groups */,
 				F428AF0E2BD1EA650061C1C3 /* Events */,
 				F411B84D2B8D69A300CA789C /* Assets.xcassets */,
+				3710D2602BDF27E300F8ADDB /* CalPals.xcdatamodeld */,
+				3710D25F2BDF27D500F8ADDB /* CalPals.entitlements */,
 				375A20992BA75D7B003ABF00 /* Launch Screen.storyboard */,
 				3077C9602BDEF0D700F59629 /* CalPals.xcdatamodeld */,
 				F411B8522B8D69A300CA789C /* Info.plist */,
@@ -376,6 +377,7 @@
 				F411B8472B8D69A100CA789C /* SceneDelegate.swift in Sources */,
 				3009B0A52BA9180D00D9F31A /* CustomCollectionViewCell copy.swift in Sources */,
 				3788ED162BDB622C003EAEC4 /* EventTableViewCell.swift in Sources */,
+				3710D2622BDF27E300F8ADDB /* CalPals.xcdatamodeld in Sources */,
 				F428AF152BD1ED420061C1C3 /* EventsViewController.swift in Sources */,
 				F4D918492BA90F2A0039ADB8 /* LocationChanger.swift in Sources */,
 				F4D918452BA8C2E90039ADB8 /* Event.swift in Sources */,
@@ -535,7 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = CalPals/CalPals.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = K9W2C9V5YF;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalPals/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -565,6 +567,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalPals/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -759,12 +762,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		3077C9602BDEF0D700F59629 /* CalPals.xcdatamodeld */ = {
+		3710D2602BDF27E300F8ADDB /* CalPals.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				3077C9612BDEF0D700F59629 /* CalPals.xcdatamodel */,
+				3710D2612BDF27E300F8ADDB /* CalPals.xcdatamodel */,
 			);
-			currentVersion = 3077C9612BDEF0D700F59629 /* CalPals.xcdatamodel */;
+			currentVersion = 3710D2612BDF27E300F8ADDB /* CalPals.xcdatamodel */;
 			path = CalPals.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
