@@ -14,8 +14,14 @@ class editUsernameViewController: UIViewController {
 
     @IBOutlet var userNameField: UITextField!
     
+    @IBOutlet weak var changePassField: UITextField!
+    @IBOutlet weak var confirmPassField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        changePassField.isSecureTextEntry = true
+        confirmPassField.isSecureTextEntry = true
     }
     
     @IBAction func savePressed(_ sender: Any) {
@@ -42,4 +48,38 @@ class editUsernameViewController: UIViewController {
             }
         }
     }
+    
+    
+    @IBAction func changeButtonPressed(_ sender: Any) {
+        updatePassword()
+    }
+    
+    private func updatePassword() {
+            guard let newPassword = changePassField.text, !newPassword.isEmpty, let confirmPassword = confirmPassField.text, !confirmPassword.isEmpty else {
+                print("Password fields cannot be empty.")
+                return
+            }
+            
+            guard newPassword == confirmPassword else {
+                print("Passwords do not match.")
+                return
+            }
+
+            if newPassword.count < 6 {
+                print("Password must be at least 6 characters long.")
+                return
+            }
+
+            if let user = Auth.auth().currentUser {
+                user.updatePassword(to: newPassword) { error in
+                    if let error = error {
+                        print("Error updating password: \(error.localizedDescription)")
+                    } else {
+                        print("Password successfully updated.")
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+        }
+    
 }

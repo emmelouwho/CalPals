@@ -12,8 +12,8 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-    @IBOutlet weak var profilePicture: UIImageView!
+   
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noEventsLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -22,36 +22,22 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var events: [Event] = []
     var activityIndicator: UIActivityIndicatorView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
-        activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.center = self.view.center
-        self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        tableView.isHidden = true
+        setupActivityIndicator()
         
-        fetchProfileImage()
-        fetchUsername()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        retrieveEvents{ events in
-            DispatchQueue.main.async {
-                self.events = events
-                if self.events.isEmpty {
-                    self.noEventsLabel.isHidden = false
-                } else {
-                    self.noEventsLabel.isHidden = true
-                }
-                self.tableView.reloadData()
-                self.tableView.rowHeight = 120
-                self.activityIndicator.stopAnimating()
-                self.tableView.isHidden = false
-            }
-        }
+    private func setupActivityIndicator() {
+           activityIndicator = UIActivityIndicatorView(style: .large)
+           activityIndicator.center = self.view.center
+           self.view.addSubview(activityIndicator)
+           activityIndicator.startAnimating()
+           tableView.isHidden = true
     }
     
     func fetchUsername() {
@@ -66,72 +52,53 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
-    func fetchProfileImage() {
-        if let user = Auth.auth().currentUser {
-            let uid = user.uid
-            let ref = Database.database().reference().child("users").child(uid).child("profileImageUrl")
-            ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
-                if let imageUrl = snapshot.value as? String, let url = URL(string: imageUrl) {
-                    self?.downloadImage(url: url)
-                }
-            })
-        }
-    }
-
-    func downloadImage(url: URL) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self?.profilePicture.image = image
-                }
-            }
-        }.resume()
-    }
-    
-    
-   
 
     
     func retrieveEvents(completion: @escaping ([Event]) -> Void) {
-            var events: [Event] = []
-            if let user = Auth.auth().currentUser {
-                let uid = user.uid
-                let ref = Database.database().reference().child("users").child(uid).child("groups")
-                
-                ref.observeSingleEvent(of: .value, with: { snapshot in
-                    if let groupsDict = snapshot.value as? [String: Any] {
-                        let groupIds = Array(groupsDict.keys)
-                        let dispatchGroup = DispatchGroup()
-                        
-                        for id in groupIds {
-                            dispatchGroup.enter()
-                            let groupRef = Database.database().reference().child("groups").child(id).child("events")
-                            
-                            groupRef.observeSingleEvent(of: .value, with: { snapshot in
-                                if let eventsDict = snapshot.value as? [String: [String: Any]] {
-                                    for (key, value) in eventsDict {
-                                        let newEvent = Event(eventDict: value, eventId: key, groupId: id)
-                                        // check eveything got set right
-                                        if newEvent.id == key{
-                                            events.append(newEvent)
-                                        }
-                                    }
-                                }
-                                dispatchGroup.leave()
-                            })
-                        }
-                        dispatchGroup.notify(queue: .main) {
-                            completion(events)
-                        }
-                    } else {
-                        completion([]) // No groups found
-                    }
-                })
-            } else {
-                completion([]) // No user logged in
+        guard let user = Auth.auth().currentUser else {
+            self.noEventsLabel.isHidden = false
+            return
+        }
+        let uid = user.uid
+        let ref = Database.database().reference().child("users").child(uid).child("groups")
+        ref.observeSingleEvent(of: .value) { snapshot in
+            guard let groupsDict = snapshot.value as? [String: Any] else {
+                self.noEventsLabel.isHidden = false
+                return
+            }
+            self.processGroups(groupsDict)
+        }
+    }
+    
+    private func processGroups(_ groupsDict: [String: Any]) {
+        var events: [Event] = []
+        let groupIds = Array(groupsDict.keys)
+        let dispatchGroup = DispatchGroup()
+        
+        for id in groupIds {
+            dispatchGroup.enter()
+            let groupRef = Database.database().reference().child("groups").child(id).child("events")
+            groupRef.observeSingleEvent(of: .value) { snapshot in
+                if let eventsDict = snapshot.value as? [String: [String: Any]] {
+                    events.append(contentsOf: eventsDict.map { Event(eventDict: $1, eventId: $0, groupId: id) })
+                }
+                dispatchGroup.leave()
             }
         }
+        dispatchGroup.notify(queue: .main) {
+            self.events = events
+            self.updateUIPostEventRetrieval()
+        }
+    }
+    
+    private func updateUIPostEventRetrieval() {
+           self.noEventsLabel.isHidden = !self.events.isEmpty
+           self.tableView.reloadData()
+           self.tableView.rowHeight = 120
+           self.activityIndicator.stopAnimating()
+           self.tableView.isHidden = self.events.isEmpty
+    }
+                                        
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
@@ -145,5 +112,49 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.configureWith(event: event)
         return cell
     }
+     
+    //Delete evnt
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let eventToDelete = events[indexPath.row]
+            let alert = UIAlertController(title: "Delete Event", message: "Are you sure you want to delete this event?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                self.deleteEvent(event: eventToDelete, indexPath: indexPath)
+            }))
+            present(alert, animated: true)
+        }
+    }
+    
+    //delete the event functionally
+    func deleteEvent(event: Event, indexPath: IndexPath) {
+        //grab the user
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let eventRef = Database.database().reference().child("users").child(uid).child("groups").child(event.groupId!).child("events").child(event.id)
+
+        // Remove event from Firebase
+        eventRef.removeValue { error, _ in
+            if let error = error {
+                print("Error deleting event: \(error.localizedDescription)")
+                return
+            }
+            
+            // Update local data source
+            self.events.remove(at: indexPath.row)
+
+            // Update the table view
+            DispatchQueue.main.async {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.endUpdates()
+                if self.events.isEmpty {
+                    self.noEventsLabel.isHidden = false
+                }
+            }
+        }
+    }
 }
