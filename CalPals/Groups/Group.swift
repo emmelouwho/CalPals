@@ -10,7 +10,6 @@ import UIKit
 import FirebaseDatabaseInternal
 import FirebaseStorage
 
-
 class Group {
     var id: String!
     var name: String!
@@ -67,4 +66,5 @@ class Group {
             }
         }
     }
+    
 }

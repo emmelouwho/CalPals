@@ -18,7 +18,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var noEventsLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
-    
     var events: [Event] = []
     var activityIndicator: UIActivityIndicatorView!
     
@@ -86,49 +85,45 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }.resume()
     }
     
-    
-   
-
-    
     func retrieveEvents(completion: @escaping ([Event]) -> Void) {
-            var events: [Event] = []
-            if let user = Auth.auth().currentUser {
-                let uid = user.uid
-                let ref = Database.database().reference().child("users").child(uid).child("groups")
-                
-                ref.observeSingleEvent(of: .value, with: { snapshot in
-                    if let groupsDict = snapshot.value as? [String: Any] {
-                        let groupIds = Array(groupsDict.keys)
-                        let dispatchGroup = DispatchGroup()
+        var events: [Event] = []
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            let ref = Database.database().reference().child("users").child(uid).child("groups")
+            
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                if let groupsDict = snapshot.value as? [String: Any] {
+                    let groupIds = Array(groupsDict.keys)
+                    let dispatchGroup = DispatchGroup()
+                    
+                    for id in groupIds {
+                        dispatchGroup.enter()
+                        let groupRef = Database.database().reference().child("groups").child(id).child("events")
                         
-                        for id in groupIds {
-                            dispatchGroup.enter()
-                            let groupRef = Database.database().reference().child("groups").child(id).child("events")
-                            
-                            groupRef.observeSingleEvent(of: .value, with: { snapshot in
-                                if let eventsDict = snapshot.value as? [String: [String: Any]] {
-                                    for (key, value) in eventsDict {
-                                        let newEvent = Event(eventDict: value, eventId: key, groupId: id)
-                                        // check eveything got set right
-                                        if newEvent.id == key{
-                                            events.append(newEvent)
-                                        }
+                        groupRef.observeSingleEvent(of: .value, with: { snapshot in
+                            if let eventsDict = snapshot.value as? [String: [String: Any]] {
+                                for (key, value) in eventsDict {
+                                    let newEvent = Event(eventDict: value, eventId: key, groupId: id)
+                                    // check eveything got set right
+                                    if newEvent.id == key{
+                                        events.append(newEvent)
                                     }
                                 }
-                                dispatchGroup.leave()
-                            })
-                        }
-                        dispatchGroup.notify(queue: .main) {
-                            completion(events)
-                        }
-                    } else {
-                        completion([]) // No groups found
+                            }
+                            dispatchGroup.leave()
+                        })
                     }
-                })
-            } else {
-                completion([]) // No user logged in
-            }
+                    dispatchGroup.notify(queue: .main) {
+                        completion(events)
+                    }
+                } else {
+                    completion([]) // No groups found
+                }
+            })
+        } else {
+            completion([]) // No user logged in
         }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count

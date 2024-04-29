@@ -160,22 +160,31 @@ class profileViewController: UIViewController {
     
     @IBAction func logoutPressed(_ sender: Any) {
         do {
-                // Sign out the user from Firebase
-                try Auth.auth().signOut()
-                
-                // Delete the user from Core Data
-                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-                if let user = try context.fetch(fetchRequest).first {
-                    context.delete(user)
-                    try context.save()
-                }
-                
-                // Dismiss the current view controller
-                self.dismiss(animated: true)
-            } catch {
-                print("Sign-out error: \(error)")
+            // Sign out the user from Firebase
+            try Auth.auth().signOut()
+            
+            // Delete the user from Core Data
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+            if let user = try context.fetch(fetchRequest).first {
+                context.delete(user)
+                try context.save()
             }
+            
+            // Dismiss the current view controller and go back to LoginViewController
+            self.dismiss(animated: true) {
+                if let navController = self.navigationController {
+                    for controller in navController.viewControllers {
+                        if let loginViewController = controller as? LoginViewController {
+                            navController.popToViewController(loginViewController, animated: true)
+                            break
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("Sign-out error: \(error)")
+        }
     }
 }
 
