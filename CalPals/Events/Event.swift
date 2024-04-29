@@ -232,7 +232,7 @@ class Event {
     
     func isConsecutiveAvailable(user: AvailabilityModel, start: Int, slotsNeeded: Int, day: Int) -> Bool {
         for i in start..<start + slotsNeeded {
-            if !user.isSlotHighlighted(at: IndexPath(row: i, section: day), slot: 0) {
+            if !user.isSlotHighlighted(at: IndexPath(row: i, section: 0), slot: day) {
                 return false
             }
         }

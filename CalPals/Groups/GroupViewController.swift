@@ -204,6 +204,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //                imageView.image = image
 //            }
         imageView.image = group.image
+        imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = imageView.frame.width / 2 // Make it a circle
             imageView.clipsToBounds = true // Clip to bounds
             cell.accessoryView = imageView // Set the image view as the accessory view of the cell

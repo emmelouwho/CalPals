@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabaseInternal
 
-class CreateAccountViewController: UIViewController {
+class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -17,6 +17,9 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailField.delegate = self
+        passwordField.delegate = self
+        confirmPasswordField.delegate = self
 
         // Do any additional setup after loading the view.
         passwordField.isSecureTextEntry = true
@@ -75,5 +78,14 @@ class CreateAccountViewController: UIViewController {
                // Perform any additional actions, such as navigating to another view controller
                self.performSegue(withIdentifier: "signUpToTabSegue", sender: self)
            }
+    }
+    
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
