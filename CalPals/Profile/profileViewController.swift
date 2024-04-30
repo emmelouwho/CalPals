@@ -12,6 +12,8 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseDatabaseInternal
 
+var globalProfileImage: UIImage?
+
 class profileViewController: UIViewController {
 
     @IBOutlet weak var profilePhoto: UIImageView!
@@ -28,12 +30,12 @@ class profileViewController: UIViewController {
         displayCreationDate()
         
         profilePhoto.image = UIImage(named: "person")
-            displayProfileImage()
-            
-            let size = min(profilePhoto.frame.size.width, profilePhoto.frame.size.height)
-            profilePhoto.frame = CGRect(x: profilePhoto.frame.origin.x, y: profilePhoto.frame.origin.y, width: size, height: size)
-            profilePhoto.layer.cornerRadius = size / 2
-            profilePhoto.clipsToBounds = true
+        displayProfileImage()
+                
+        let size = min(profilePhoto.frame.size.width, profilePhoto.frame.size.height)
+        profilePhoto.frame = CGRect(x: profilePhoto.frame.origin.x, y: profilePhoto.frame.origin.y, width: size, height: size)
+        profilePhoto.layer.cornerRadius = size / 2
+        profilePhoto.clipsToBounds = true
         profilePhoto.contentMode = .scaleAspectFill
     }
     
@@ -122,6 +124,7 @@ class profileViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let image = UIImage(data: data) {
                     self.profilePhoto.image = image
+                    globalProfileImage = image
                     } else {
                         print("Failed to create image from data.")
                     }
@@ -160,22 +163,31 @@ class profileViewController: UIViewController {
     
     @IBAction func logoutPressed(_ sender: Any) {
         do {
-                // Sign out the user from Firebase
-                try Auth.auth().signOut()
-                
-                // Delete the user from Core Data
-                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-                if let user = try context.fetch(fetchRequest).first {
-                    context.delete(user)
-                    try context.save()
-                }
-                
-                // Dismiss the current view controller
-                self.dismiss(animated: true)
-            } catch {
-                print("Sign-out error: \(error)")
+            // Sign out the user from Firebase
+            try Auth.auth().signOut()
+            
+            // Delete the user from Core Data
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+            if let user = try context.fetch(fetchRequest).first {
+                context.delete(user)
+                try context.save()
             }
+            
+            // Dismiss the current view controller and go back to LoginViewController
+            self.dismiss(animated: true) {
+                if let navController = self.navigationController {
+                    for controller in navController.viewControllers {
+                        if let loginViewController = controller as? LoginViewController {
+                            navController.popToViewController(loginViewController, animated: true)
+                            break
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("Sign-out error: \(error)")
+        }
     }
 }
 

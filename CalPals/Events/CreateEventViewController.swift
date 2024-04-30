@@ -72,11 +72,11 @@ class CreateEventViewController: UIViewController, LocationChanger, UITextFieldD
     }
     
     func timeConstaintsSetUp(defaultTime: String, button: UIButton, optionClosure: @escaping UIActionHandler) {
-        let actions = allTimes.reversed().map { title in
+        let actions: [UIMenuElement] = allTimes.reversed().map { title in
             if title == defaultTime {
-                UIAction(title: title, state: .on, handler: optionClosure)
+                return UIAction(title: title, state: .on, handler: optionClosure)
             } else {
-                UIAction(title: title, handler: optionClosure)
+                return UIAction(title: title, handler: optionClosure)
             }
         }
         
@@ -140,11 +140,11 @@ class CreateEventViewController: UIViewController, LocationChanger, UITextFieldD
             }
         }
         
-        let durationOptions = timeList.reversed().map {  title in
+        let durationOptions: [UIMenuElement] = timeList.reversed().map {  title in
             if title == "30 min" {
-                UIAction(title: title, state: .on, handler: optionClosure)
+                return UIAction(title: title, state: .on, handler: optionClosure)
             } else {
-                UIAction(title: title, handler: optionClosure)
+                return UIAction(title: title, handler: optionClosure)
             }
         }
         durationButton.menu = UIMenu(children: durationOptions)

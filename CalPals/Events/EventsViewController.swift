@@ -18,6 +18,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var noEventsLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
+    @IBOutlet weak var profilePhoto: UIImageView!
     
     var events: [Event] = []
     var activityIndicator: UIActivityIndicatorView!
@@ -30,8 +31,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         fetchUsername()
         retrieveEvents { events in
-                self.events = events
-                self.updateUIPostEventRetrieval()
+            self.events = events
+            self.updateUIPostEventRetrieval()
         }
         setupActivityIndicator()
     }
@@ -55,8 +56,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
         }
     }
-    
-
     
     func retrieveEvents(completion: @escaping ([Event]) -> Void) {
         guard let user = Auth.auth().currentUser else {
@@ -117,7 +116,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
      
-    //Delete evnt
+    //Delete event
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

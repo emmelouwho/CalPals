@@ -9,6 +9,7 @@ import Foundation
 import FirebaseDatabaseInternal
 
 class Event {
+    
     var id: String!
     var name: String?
     var loc: String?
