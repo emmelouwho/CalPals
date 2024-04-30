@@ -161,18 +161,18 @@ class CreateEventViewController: UIViewController, LocationChanger, UITextFieldD
             controller.addAction(UIAlertAction(title: "OK", style: .default))
             present(controller,animated: true)
         } else {
-            // add to firebase
-            if let user = Auth.auth().currentUser {
-                let uid = user.uid
-                newEvent.storeDataInFireBase(for: uid)
-            }
             
             newEvent.findEventTime { time in
                 if time == nil {
-                    let controller = UIAlertController(title: "Event Successfully Created! But no time was found", message: self.newEvent.eventCreatedMessage(), preferredStyle: .alert)
+                    let controller = UIAlertController(title: "No time for your event was found", message: self.newEvent.eventCreatedMessage(), preferredStyle: .alert)
                     controller.addAction(UIAlertAction(title: "OK", style: .default) {_ in self.viewDidLoad()})
                     self.present(controller,animated: true)
                 } else {
+                    // add to firebase
+                    if let user = Auth.auth().currentUser {
+                        let uid = user.uid
+                        self.newEvent.storeDataInFireBase(for: uid)
+                    }
                     let controller = UIAlertController(title: "Event Successfully Created!", message: self.newEvent.eventCreatedMessage(), preferredStyle: .alert)
                     controller.addAction(UIAlertAction(title: "OK", style: .default) {_ in self.viewDidLoad()})
                     self.present(controller,animated: true)
