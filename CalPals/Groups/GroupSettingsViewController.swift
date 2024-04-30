@@ -18,11 +18,13 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var groupImage: UIImageView!
     @IBOutlet weak var noEventsLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         eventTableView.dataSource = self
         eventTableView.delegate = self
         
+        // group image set up
         groupNameLabel.text = currGroup!.name
         if let image = currGroup!.image {
             groupImage.image = image
@@ -31,14 +33,16 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
         groupImage.layer.cornerRadius = groupImage.frame.size.width / 2
         groupImage.clipsToBounds = true
         
-        // Do any additional setup after loading the view.
+        // handling event label
+        noEventsLabel.isHidden = true
+
         if let groupName = currGroup?.name {
             noEventsLabel.text = "\(groupName) has no events. Go to the Add Tab to create an event."
         } else {
             noEventsLabel.text = "This group has no events. Go to the Add Tab to create an event."
         }
         
-        // Call retrieveEvents function to fetch events for the current group
+        // call retrieveEvents function to fetch events for the current group
         if let groupID = currGroup?.id {
             retrieveEvents(forGroup: groupID) { [weak self] events in
                 DispatchQueue.main.async {
@@ -62,22 +66,13 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
             if let eventsDict = snapshot.value as? [String: [String: Any]] {
                 for (key, value) in eventsDict {
                     let newEvent = Event(eventDict: value, eventId: key, groupId: groupID)
-                    self.events.append(newEvent)
+                    if !self.events.contains(where: {$0.id == newEvent.id}) {
+                        self.events.append(newEvent)
+                    }
                 }
             }
             completion(self.events)
         })
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        groupNameLabel.text = currGroup!.name
-        if let image = currGroup!.image {
-            groupImage.image = image
-            groupImage.contentMode = .scaleAspectFill
-        }
-        groupImage.layer.cornerRadius = groupImage.frame.size.width / 2
-        groupImage.clipsToBounds = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

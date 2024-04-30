@@ -12,6 +12,8 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseDatabaseInternal
 
+var globalProfileImage: UIImage?
+
 class profileViewController: UIViewController {
 
     @IBOutlet weak var profilePhoto: UIImageView!
@@ -28,12 +30,12 @@ class profileViewController: UIViewController {
         displayCreationDate()
         
         profilePhoto.image = UIImage(named: "person")
-            displayProfileImage()
-            
-            let size = min(profilePhoto.frame.size.width, profilePhoto.frame.size.height)
-            profilePhoto.frame = CGRect(x: profilePhoto.frame.origin.x, y: profilePhoto.frame.origin.y, width: size, height: size)
-            profilePhoto.layer.cornerRadius = size / 2
-            profilePhoto.clipsToBounds = true
+        displayProfileImage()
+                
+        let size = min(profilePhoto.frame.size.width, profilePhoto.frame.size.height)
+        profilePhoto.frame = CGRect(x: profilePhoto.frame.origin.x, y: profilePhoto.frame.origin.y, width: size, height: size)
+        profilePhoto.layer.cornerRadius = size / 2
+        profilePhoto.clipsToBounds = true
         profilePhoto.contentMode = .scaleAspectFill
     }
     
@@ -122,6 +124,7 @@ class profileViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let image = UIImage(data: data) {
                     self.profilePhoto.image = image
+                    globalProfileImage = image
                     } else {
                         print("Failed to create image from data.")
                     }
