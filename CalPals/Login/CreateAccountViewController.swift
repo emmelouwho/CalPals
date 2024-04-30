@@ -76,6 +76,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
                }
 
                // Perform any additional actions, such as navigating to another view controller
+               self.dismiss(animated: false, completion: nil)
                self.performSegue(withIdentifier: "signUpToTabSegue", sender: self)
            }
     }
